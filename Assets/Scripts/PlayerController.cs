@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float bulletSpeed = 10f;
     
+    [SerializeField]
+    private int bulletDamage = 1;
+    
     public GameObject bulletPrefab;
     
     /// <summary>
@@ -96,15 +99,9 @@ public class PlayerController : MonoBehaviour
         {
             if (fireRateTimer <= 0f)
             {
-                // Fire towards shootDir
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                 
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                rb.AddForce(shootDir * bulletSpeed,  ForceMode2D.Impulse);
+                Shoot();
                 fireRateTimer = fireRate;
             }
-             
-            
             fireRateTimer = Mathf.Clamp(fireRateTimer - Time.deltaTime, 0f, 1f);
         }
     }
@@ -116,5 +113,17 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
         dashTimeRemaining -= Time.fixedDeltaTime;
         isDashing = isDashing && dashTimeRemaining > 0;
+    }
+
+    private void Shoot()
+    {
+        // Fire towards shootDir
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                 
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(shootDir * bulletSpeed,  ForceMode2D.Impulse);
+
+        bullet.TryGetComponent(out BulletController bulletController);
+        bulletController.SetDamage(bulletDamage);
     }
 }
