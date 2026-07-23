@@ -56,8 +56,11 @@ public class PlayerController : MonoBehaviour
     public void OnShoot(InputValue shootValue)
     {
         Vector2 shootInput = shootValue.Get<Vector2>();
-
-        Debug.Log("Shoot Input: " + shootInput);
+        
+        // check to avoid double shooting when the input comes back to center.
+        // Maybe adjust to some epsilon value for Joysticks?
+        if(shootInput.magnitude > 0f)
+            Debug.Log("Shoot Input: " + shootInput);
         // Implement shooting logic here
     }
 
