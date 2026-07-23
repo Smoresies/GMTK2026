@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,19 +16,29 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float dashCooldown = 1f;
-
-    [SerializeField]
     
-    /// <summary>
-    /// The rigidibody component attached to the player. This is used to apply movement forces to the player object.
-    /// </summary>
+    [SerializeField]
     private Rigidbody2D rigidBody;
+    
+    [SerializeField]
+    private float fireRate = 0.5f;
+    
+    [SerializeField]
+    private float bulletSpeed = 10f;
+    
+    public GameObject bulletPrefab;
+    
     /// <summary>
     /// The current movement input from the player. This is a Vector2 representing the direction and magnitude of the player's movement input.
     /// </summary>
     private Vector2 moveInput;
+    
     private bool isDashing = false;
     private float dashTimeRemaining = 0f;
+    
+    private bool isFiring = false;
+    private Vector2 shootDir = Vector2.zero;
+    private float fireRateTimer = 0f;
 
 
     void Start()
@@ -44,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing)
         {
-            moveInput = movementValue.Get<Vector2>();
+            moveInput = movementValue.Get<Vector2>().normalized;
             // Debug.Log("Move Input: " + moveInput);
         }
     }
@@ -59,8 +70,10 @@ public class PlayerController : MonoBehaviour
         
         // check to avoid double shooting when the input comes back to center.
         // Maybe adjust to some epsilon value for Joysticks?
-        if(shootInput.magnitude > 0f)
-            Debug.Log("Shoot Input: " + shootInput);
+        isFiring = shootInput.magnitude > 0f;
+        if  (isFiring)
+            shootDir = shootInput.normalized;
+        // Debug.Log("Shoot Input: " + shootInput);
         // Implement shooting logic here
     }
 
@@ -74,10 +87,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void Update()
+    {
+        Debug.Log(fireRateTimer);
+        
+        // Only fire if we are inputting to fire and the timer is 0. 
+        if (isFiring)
+        {
+            if (fireRateTimer <= 0f)
+            {
+                // Fire towards shootDir
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                 
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                rb.AddForce(shootDir * bulletSpeed,  ForceMode2D.Impulse);
+                fireRateTimer = fireRate;
+            }
+             
+            
+            fireRateTimer = Mathf.Clamp(fireRateTimer - Time.deltaTime, 0f, 1f);
+        }
+    }
+
+    private void FixedUpdate()
     {
         float currentSpeed = isDashing ? dashSpeed : moveSpeed;
-        rigidBody.linearVelocity = moveInput * currentSpeed * Time.fixedDeltaTime;
+        rigidBody.linearVelocity = moveInput * (currentSpeed * Time.fixedDeltaTime);
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
         dashTimeRemaining -= Time.fixedDeltaTime;
         isDashing = isDashing && dashTimeRemaining > 0;
