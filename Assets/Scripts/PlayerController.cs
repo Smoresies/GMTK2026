@@ -129,4 +129,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player took " + damage + " damage");
     }
+
+    public Rigidbody2D GetRigidbody()
+    {
+        return rigidBody;
+    }
 }

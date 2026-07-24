@@ -10,11 +10,15 @@ public class EnemyController : MonoBehaviour
     protected MovementAi movementAi;
     [SerializeField]
     protected float moveSpeed = 5f;
+
+    protected PlayerController player;
+
     void Start()
     {
         // Cache the Rigidbody2D component attached to the player
         rigidBody = GetComponent<Rigidbody2D>();
-        movementAi.initialize(FindAnyObjectByType<PlayerController>().transform, transform);
+        player = FindAnyObjectByType<PlayerController>();
+        movementAi.initialize(player.transform, transform);
     }
     public virtual void TakeDamage(float damage)
     {

@@ -16,7 +16,6 @@ public static class RandomUtils
         {
             // Pick a random index from 0 to i
             int randomIndex = getRandomizer(seeded).Next(0, list.Count);
-            
             // Swap elements
             T temp = list[i];
             list[i] = list[randomIndex];
