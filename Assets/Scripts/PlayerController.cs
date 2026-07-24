@@ -5,64 +5,71 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] 
-    private float healthTimer = 600f;
-    
-    [SerializeField]
-    private float moveSpeed = 5f;
+    [SerializeField] private float healthTimer = 600f;
 
-    [SerializeField]
-    private float dashSpeed = 30f;
+    [SerializeField] private float moveSpeed = 5f;
 
-    [SerializeField]
-    private float dashDuration = 0.2f;
+    [SerializeField] private float dashSpeed = 30f;
 
-    [SerializeField]
-    private float dashCooldown = 1f;
-    
-    [SerializeField]
-    private Rigidbody2D rigidBody;
-    
-    [SerializeField]
-    private float fireRate = 0.5f;
-    
-    [SerializeField]
-    private float bulletSpeed = 10f;
-    
-    [SerializeField]
-    private int bulletDamage = 1;
-    
+    [SerializeField] private float dashDuration = 0.2f;
+
+    [SerializeField] private float dashCooldown = 1f;
+
+    [SerializeField] private Rigidbody2D rigidBody;
+
+    [SerializeField] private float fireRate = 0.5f;
+
+    [SerializeField] private float bulletSpeed = 10f;
+
+    [SerializeField] private int bulletDamage = 1;
+
     public GameObject bulletPrefab;
-    
+
     /// <summary>
     /// The current movement input from the player. This is a Vector2 representing the direction and magnitude of the player's movement input.
     /// </summary>
     private Vector2 moveInput;
 
     private Vector2 lastMoveDir = Vector2.up;
-    
+
     private bool isDashing = false;
     private float dashTimeRemaining = 0f;
-    
+
     private bool isFiring = false;
     private Vector2 shootDir = Vector2.zero;
     private float fireRateTimer = 0f;
     private int everyFiveSecondsTimer = 595;
-    
+
+    public float relicCDs { get; private set; } = 5.0f;
+
     private float frozenTimeTimer = 0.0f;
-    private float chronoBootsCD = 0.5f;
+    private float chronoBootsCD = 0.0f;
+    public float chronoCharmCD = 0.0f;
 
     // This is the crit-related stuff
     private float critRate = 0.1f;
     private float critDamage = 1.5f;
-    
+
     /// <summary>
     /// THIS IS THE LIST OF ALL OF THE RELIC BOOLEANS
     /// </summary>
     private bool carmineKnight = false;
+
     private bool carmineRook = false;
     private bool carmineBishop = false;
     private bool chronomancersBoots = false;
+    private bool edPills = false;
+    
+    // Needed externally for Bullets
+    public bool hasRippedClover { get; private set; } = false;
+    public bool hasWeightedDie { get; private set; } = false;
+    public bool hasChronoCharm { get; private set; } = false;
+
+    // Needed just... fucking... everywhere.
+    public bool hasTrickstersDeck { get; private set; } = false;
+
+    // Temporal Paradoxes for Dummies
+    private bool TPfD = false;
 
     void Start()
     {
@@ -94,11 +101,11 @@ public class PlayerController : MonoBehaviour
     public void OnShoot(InputValue shootValue)
     {
         Vector2 shootInput = shootValue.Get<Vector2>();
-        
+
         // check to avoid double shooting when the input comes back to center.
         // Maybe adjust to some epsilon value for Joysticks?
         isFiring = shootInput.magnitude > 0f;
-        if  (isFiring)
+        if (isFiring)
             shootDir = shootInput.normalized;
         // Debug.Log("Shoot Input: " + shootInput);
         // Implement shooting logic here
@@ -123,7 +130,7 @@ public class PlayerController : MonoBehaviour
             EveryFiveSeconds();
             everyFiveSecondsTimer -= 1;
         }
-        
+
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
         {
@@ -132,12 +139,13 @@ public class PlayerController : MonoBehaviour
                 Shoot(shootDir);
                 fireRateTimer = fireRate;
             }
+
             fireRateTimer = Mathf.Clamp(fireRateTimer - Time.deltaTime, 0f, 1f);
         }
-        
+
         // This needs a check to make sure the Room Challenge has begun
         // Otherwise it will constantly go down regardless.
-        if(frozenTimeTimer <= 0.0f)
+        if (frozenTimeTimer <= 0.0f)
             healthTimer -= Time.deltaTime;
         else
             frozenTimeTimer -= Time.deltaTime;
@@ -157,51 +165,59 @@ public class PlayerController : MonoBehaviour
     {
         // Fire towards shootDir
         GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
-                 
+
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(_shootDir * bulletSpeed,  ForceMode2D.Impulse);
+        rb.AddForce(_shootDir * bulletSpeed, ForceMode2D.Impulse);
 
         bullet.TryGetComponent(out BulletController bulletController);
         bulletController.SetDamage(bulletDamage, critRate, critDamage);
+
+        if (edPills)
+        {
+            bullet.transform.localScale *= 2f;
+            if (hasTrickstersDeck)
+                bullet.transform.localScale *= 2f;
+        }
     }
 
     private void EveryFiveSeconds()
     {
         // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
+        int repeats = hasTrickstersDeck ? 1 : 2;
 
-        // Implementation of Carmine Rook - Cardinal Shooting
-        if (carmineRook)
+        for (int i = 0; i < repeats; ++i)
         {
-            Shoot(Vector2.up);
-            Shoot(Vector2.down);
-            Shoot(Vector2.left);
-            Shoot(Vector2.right);
-        }
-        
-        // Implementation of Carmine Bishop - Inter-Cardinal Shooting
-        if (carmineBishop)
-        {
-            Shoot((Vector2.up + Vector2.right).normalized);
-            Shoot((Vector2.up + Vector2.left).normalized);
-            Shoot((Vector2.down + Vector2.right).normalized);
-            Shoot((Vector2.down + Vector2.left).normalized);
-        }
-        
-        // Implementations of Carmine Knight - + shape in direction shooting/facing
-        if (carmineKnight)
-        {
-            Vector2 carmineKnightDir = Vector2.up;
-            if (shootDir.magnitude > 0f)
-                carmineKnightDir = shootDir;
-            Shoot(carmineKnightDir, new Vector3(0.5f, 0.5f));
-            Shoot(carmineKnightDir, new Vector3(-0.5f, 0.5f));
-            Shoot(carmineKnightDir);
-            Shoot(carmineKnightDir,  new Vector3(0, 0.5f));
-            Shoot(carmineKnightDir,  new Vector3(0, 1f));
-        }
+            // Implementation of Carmine Rook - Cardinal Shooting
+            if (carmineRook)
+            {
+                Shoot(Vector2.up);
+                Shoot(Vector2.down);
+                Shoot(Vector2.left);
+                Shoot(Vector2.right);
+            }
 
-        
-        
+            // Implementation of Carmine Bishop - Inter-Cardinal Shooting
+            if (carmineBishop)
+            {
+                Shoot((Vector2.up + Vector2.right).normalized);
+                Shoot((Vector2.up + Vector2.left).normalized);
+                Shoot((Vector2.down + Vector2.right).normalized);
+                Shoot((Vector2.down + Vector2.left).normalized);
+            }
+
+            // Implementations of Carmine Knight - + shape in direction shooting/facing
+            if (carmineKnight)
+            {
+                Vector2 carmineKnightDir = Vector2.up;
+                if (shootDir.magnitude > 0f)
+                    carmineKnightDir = shootDir;
+                Shoot(carmineKnightDir, new Vector3(0.5f, 0.5f));
+                Shoot(carmineKnightDir, new Vector3(-0.5f, 0.5f));
+                Shoot(carmineKnightDir);
+                Shoot(carmineKnightDir, new Vector3(0, 0.5f));
+                Shoot(carmineKnightDir, new Vector3(0, 1f));
+            }
+        }
     }
 
     private void dashingRelics()
@@ -209,19 +225,29 @@ public class PlayerController : MonoBehaviour
         // Implementation for Chronomancer's Boots. Freeze for 0.5s
         if (chronomancersBoots && frozenTimeTimer > 0f && isDashing && chronoBootsCD <= 0f)
         {
-            chronoBootsCD = 5.0f;
-            frozenTimeTimer = 1.0f;
+            chronoBootsCD = relicCDs;
+            freezeTime();
+            if (hasTrickstersDeck)
+                freezeTime();
         }
     }
-    
+
+    public void freezeTime()
+    {
+        // Specifically set for "double trigger" opportunities.
+        if (frozenTimeTimer > 0f)
+            frozenTimeTimer += 1.0f;
+        else
+            frozenTimeTimer = 1.0f;
+
+        if (TPfD)
+            frozenTimeTimer *= 2.0f;
+    }
+
     private void relicCooldowns()
     {
         chronoBootsCD -= Time.deltaTime;
-    }
-    
-    public float GetHealth()
-    {
-        return healthTimer;
+        chronoCharmCD -= Time.deltaTime;
     }
 
     // Call this when the player gets the Wizard Coke Relic.
@@ -234,7 +260,18 @@ public class PlayerController : MonoBehaviour
     public void CritUpdate(bool infEdges = false)
     {
         critRate += 0.1f;
-        if(infEdges)
+        if (infEdges)
             critDamage = 2.0f;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        healthTimer -= damage;
+        Debug.Log(healthTimer);
+        if (healthTimer <= 0)
+        {
+            // Eventually add some like. Art/effect here
+            Destroy(gameObject);
+        }
     }
 }
