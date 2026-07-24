@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] 
+    private float healthTimer = 600f;
+    
     [SerializeField]
     private float moveSpeed = 5f;
 
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashCooldown = 1f;
     
+    [SerializeField]
     private Rigidbody2D rigidBody;
     
     [SerializeField]
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private bool isFiring = false;
     private Vector2 shootDir = Vector2.zero;
     private float fireRateTimer = 0f;
+    private int everyFiveSecondsTimer = 595;
 
 
     void Start()
@@ -91,18 +96,26 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(fireRateTimer);
+        if (healthTimer <= everyFiveSecondsTimer)
+        {
+            EveryFiveSeconds();
+            everyFiveSecondsTimer -= 5;
+        }
         
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
         {
             if (fireRateTimer <= 0f)
             {
-                Shoot();
+                Shoot(shootDir);
                 fireRateTimer = fireRate;
             }
             fireRateTimer = Mathf.Clamp(fireRateTimer - Time.deltaTime, 0f, 1f);
         }
+        
+        // This needs a check to make sure the Room Challenge has begun
+        // Otherwise it will constantly go down regardless.
+        healthTimer -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -114,15 +127,33 @@ public class PlayerController : MonoBehaviour
         isDashing = isDashing && dashTimeRemaining > 0;
     }
 
-    private void Shoot()
+    private void Shoot(Vector2 _shootDir)
     {
         // Fire towards shootDir
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
                  
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(shootDir * bulletSpeed,  ForceMode2D.Impulse);
+        rb.AddForce(_shootDir * bulletSpeed,  ForceMode2D.Impulse);
 
         bullet.TryGetComponent(out BulletController bulletController);
         bulletController.SetDamage(bulletDamage);
+    }
+    
+    private void EveryFiveSeconds()
+    {
+        // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
+        
+        // Implementation of Carmine Rook - Cardinal Shooting
+        Shoot(Vector2.up);
+        Shoot(Vector2.down);
+        Shoot(Vector2.left);
+        Shoot(Vector2.right);
+        
+        // Implementation of Carmine Bishop - Inter-Cardinal Shooting
+        Shoot((Vector2.up + Vector2.right).normalized);
+        Shoot((Vector2.up + Vector2.left).normalized);
+        Shoot((Vector2.down + Vector2.right).normalized);
+        Shoot((Vector2.down + Vector2.left).normalized);
+        
     }
 }
