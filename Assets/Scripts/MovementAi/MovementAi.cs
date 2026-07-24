@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementAi : MonoBehaviour
+public abstract class MovementAi : MonoBehaviour
 {
     protected Transform player;
     protected Transform self;

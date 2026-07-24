@@ -3,42 +3,53 @@ using UnityEngine;
 public class DaggerCultistEnemy : EnemyController
 {
     [SerializeField]
-    protected MoveToPlayerAi moveToPlayerAi;
-    [SerializeField] 
-    protected MoveAwayFromPlayerAi runAwayAi;
+    protected MoveToPositionAI moveToPositionAi;
+    [SerializeField]
+    protected NoMovementAi noMovementAi;
     [SerializeField]
     private float timeBetweenAttacks = 3f;
     private float timeBeforeNextAttack = 0f;
     [SerializeField]
     private int attackDamage = 1;
+    [SerializeField]
+    private float distanceToPlayer;
+    [SerializeField]
+    private float attackDistance;
     protected void Start()
     {
         base.Start();
-        moveToPlayerAi.initialize(player.transform, transform);
-        runAwayAi.initialize(player.transform, transform);
-        initNewMovementAi(moveToPlayerAi);
+        moveToPositionAi.initialize(player.transform, transform);
+        noMovementAi.initialize(player.transform, transform);
+        initNewMovementAi(moveToPositionAi);
     }
 
     private void initNewMovementAi(MovementAi newMovementAi)
     {
         movementAi = newMovementAi;
+        movementAi.initialize(player.transform, transform);
+        Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
     }
 
     protected void FixedUpdate()
     {
         base.FixedUpdate();
         timeBeforeNextAttack -= Time.fixedDeltaTime;
-        if (movementAi == moveToPlayerAi && moveToPlayerAi.IsWithinStopDistance())
+        if (movementAi == moveToPositionAi && moveToPositionAi.IsWithinStopDistance())
         {
-            initNewMovementAi(runAwayAi);
+            initNewMovementAi(noMovementAi);
             timeBeforeNextAttack = timeBetweenAttacks;
-            player.TakeDamage(attackDamage);
-            Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
+
+            if ((player.transform.position - transform.position).magnitude < attackDistance)
+            {
+                player.TakeDamage(attackDamage);
+                Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
+            }
         }
-        else if (movementAi == runAwayAi && timeBeforeNextAttack < 0f)
+        else if (movementAi == noMovementAi && timeBeforeNextAttack < 0f)
         {
-            initNewMovementAi(moveToPlayerAi);
+            moveToPositionAi.UpdateValues(player.transform.position.x - distanceToPlayer, player.transform.position.x + distanceToPlayer, player.transform.position.y - distanceToPlayer, player.transform.position.y + distanceToPlayer);
+            initNewMovementAi(moveToPositionAi);
             Debug.Log(this.name + " is now moving towards the player");
         }
-    } 
+    }
 }

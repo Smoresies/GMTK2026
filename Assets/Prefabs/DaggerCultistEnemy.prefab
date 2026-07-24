@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1068197089793671660}
   - component: {fileID: 3454217855709824286}
-  - component: {fileID: 3734110275116733301}
-  - component: {fileID: 396396226340040799}
+  - component: {fileID: 8647663329264004823}
+  - component: {fileID: -927870289759768313}
   - component: {fileID: 2878248063410293613}
   - component: {fileID: 3801995905568401070}
   - component: {fileID: 8576200662895573310}
@@ -50,13 +50,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DaggerCultistEnemy
   health: 10
-  movementAi: {fileID: 3734110275116733301}
+  movementAi: {fileID: -927870289759768313}
   moveSpeed: 300
-  moveToPlayerAi: {fileID: 3734110275116733301}
-  runAwayAi: {fileID: 396396226340040799}
-  timeBetweenAttacks: 1
+  moveToPositionAi: {fileID: 8647663329264004823}
+  noMovementAi: {fileID: -927870289759768313}
+  timeBetweenAttacks: 2
   attackDamage: 1
---- !u!114 &3734110275116733301
+  distanceToPlayer: 1.2
+  attackDistance: 1.5
+--- !u!114 &8647663329264004823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,11 +67,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5287844853113591602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2e1d3ee59f24042881928df2cab30a, type: 3}
+  m_Script: {fileID: 11500000, guid: edfec6282a2bcd741ade9a54489b4286, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveToPlayerAi
-  stopDistance: 1.2
---- !u!114 &396396226340040799
+  m_EditorClassIdentifier: Assembly-CSharp::MoveToPositionAI
+  minX: 0
+  maxX: 10
+  minY: 0
+  maxY: 10
+--- !u!114 &-927870289759768313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,10 +83,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5287844853113591602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6f9761d9b8da4f8cc7ffeb8f47325, type: 3}
+  m_Script: {fileID: 11500000, guid: 80d89ae98cdae7c40b0c2624af87d735, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveAwayFromPlayerAi
-  stopDistance: 100
+  m_EditorClassIdentifier: Assembly-CSharp::NoMovementAi
 --- !u!212 &2878248063410293613
 SpriteRenderer:
   serializedVersion: 2

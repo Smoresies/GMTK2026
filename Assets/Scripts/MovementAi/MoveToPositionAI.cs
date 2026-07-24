@@ -26,7 +26,7 @@ public class MoveToPositionAI : MovementAi
     public override Vector3 GetMoveDirection()
     {
         // Move towards the player
-        if ((moveLocation - self.position).magnitude < 0.1f)
+        if (IsWithinStopDistance())
         {
             return Vector3.zero;
         }
@@ -35,5 +35,19 @@ public class MoveToPositionAI : MovementAi
             return (moveLocation - self.position).normalized;
         }
     }
+
+    public bool IsWithinStopDistance()
+    {
+        return (moveLocation - self.position).magnitude < 0.1f;
+    }
+
+    public void UpdateValues(float minX, float maxX, float minY, float maxY)
+    {
+        this.minX = minX;
+        this.maxX = maxX;
+        this.minY = minY;
+        this.maxY = maxY;
+    }
+        
     
 }
