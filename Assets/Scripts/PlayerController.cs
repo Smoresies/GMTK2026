@@ -48,7 +48,21 @@ public class PlayerController : MonoBehaviour
     private Vector2 shootDir = Vector2.zero;
     private float fireRateTimer = 0f;
     private int everyFiveSecondsTimer = 595;
+    
+    private float frozenTimeTimer = 0.0f;
+    private float chronoBootsCD = 0.5f;
 
+    // This is the crit-related stuff
+    private float critRate = 0.1f;
+    private float critDamage = 1.5f;
+    
+    /// <summary>
+    /// THIS IS THE LIST OF ALL OF THE RELIC BOOLEANS
+    /// </summary>
+    private bool carmineKnight = false;
+    private bool carmineRook = false;
+    private bool carmineBishop = false;
+    private bool chronomancersBoots = false;
 
     void Start()
     {
@@ -96,12 +110,14 @@ public class PlayerController : MonoBehaviour
         {
             // Debug.Log("Dash Input: Pressed");
             isDashing = true;
+            dashingRelics();
             dashTimeRemaining = dashDuration;
         }
     }
 
     private void Update()
     {
+        // print(healthTimer);
         if (healthTimer <= everyFiveSecondsTimer)
         {
             EveryFiveSeconds();
@@ -121,7 +137,11 @@ public class PlayerController : MonoBehaviour
         
         // This needs a check to make sure the Room Challenge has begun
         // Otherwise it will constantly go down regardless.
-        healthTimer -= Time.deltaTime;
+        if(frozenTimeTimer <= 0.0f)
+            healthTimer -= Time.deltaTime;
+        else
+            frozenTimeTimer -= Time.deltaTime;
+        relicCooldowns();
     }
 
     private void FixedUpdate()
@@ -133,7 +153,7 @@ public class PlayerController : MonoBehaviour
         isDashing = isDashing && dashTimeRemaining > 0;
     }
 
-    private void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
+    public void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
     {
         // Fire towards shootDir
         GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
@@ -142,34 +162,79 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(_shootDir * bulletSpeed,  ForceMode2D.Impulse);
 
         bullet.TryGetComponent(out BulletController bulletController);
-        bulletController.SetDamage(bulletDamage);
+        bulletController.SetDamage(bulletDamage, critRate, critDamage);
     }
-    
+
     private void EveryFiveSeconds()
     {
         // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
-        /*
+
         // Implementation of Carmine Rook - Cardinal Shooting
-        Shoot(Vector2.up);
-        Shoot(Vector2.down);
-        Shoot(Vector2.left);
-        Shoot(Vector2.right);
+        if (carmineRook)
+        {
+            Shoot(Vector2.up);
+            Shoot(Vector2.down);
+            Shoot(Vector2.left);
+            Shoot(Vector2.right);
+        }
         
         // Implementation of Carmine Bishop - Inter-Cardinal Shooting
-        Shoot((Vector2.up + Vector2.right).normalized);
-        Shoot((Vector2.up + Vector2.left).normalized);
-        Shoot((Vector2.down + Vector2.right).normalized);
-        Shoot((Vector2.down + Vector2.left).normalized);
-        */
+        if (carmineBishop)
+        {
+            Shoot((Vector2.up + Vector2.right).normalized);
+            Shoot((Vector2.up + Vector2.left).normalized);
+            Shoot((Vector2.down + Vector2.right).normalized);
+            Shoot((Vector2.down + Vector2.left).normalized);
+        }
+        
         // Implementations of Carmine Knight - + shape in direction shooting/facing
-        Vector2 carmineKnightDir = Vector2.up;
-        if (shootDir.magnitude > 0f)
-            carmineKnightDir = shootDir;
-        Shoot(carmineKnightDir, new Vector3(0.5f, 0.5f));
-        Shoot(carmineKnightDir, new Vector3(-0.5f, 0.5f));
-        Shoot(carmineKnightDir);
-        Shoot(carmineKnightDir,  new Vector3(0, 0.5f));
-        Shoot(carmineKnightDir,  new Vector3(0, 1f));
+        if (carmineKnight)
+        {
+            Vector2 carmineKnightDir = Vector2.up;
+            if (shootDir.magnitude > 0f)
+                carmineKnightDir = shootDir;
+            Shoot(carmineKnightDir, new Vector3(0.5f, 0.5f));
+            Shoot(carmineKnightDir, new Vector3(-0.5f, 0.5f));
+            Shoot(carmineKnightDir);
+            Shoot(carmineKnightDir,  new Vector3(0, 0.5f));
+            Shoot(carmineKnightDir,  new Vector3(0, 1f));
+        }
 
+        
+        
+    }
+
+    private void dashingRelics()
+    {
+        // Implementation for Chronomancer's Boots. Freeze for 0.5s
+        if (chronomancersBoots && frozenTimeTimer > 0f && isDashing && chronoBootsCD <= 0f)
+        {
+            chronoBootsCD = 5.0f;
+            frozenTimeTimer = 1.0f;
+        }
+    }
+    
+    private void relicCooldowns()
+    {
+        chronoBootsCD -= Time.deltaTime;
+    }
+    
+    public float GetHealth()
+    {
+        return healthTimer;
+    }
+
+    // Call this when the player gets the Wizard Coke Relic.
+    public void wizardCoke()
+    {
+        fireRate /= 2f;
+    }
+
+    // This needs to be called when you receive the Infinite Edges Charm
+    public void CritUpdate(bool infEdges = false)
+    {
+        critRate += 0.1f;
+        if(infEdges)
+            critDamage = 2.0f;
     }
 }

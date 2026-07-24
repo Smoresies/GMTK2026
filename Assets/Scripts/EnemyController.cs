@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.Log(health);
         if (health <= 0)
         {
             // Eventually add some like. Art/effect here
