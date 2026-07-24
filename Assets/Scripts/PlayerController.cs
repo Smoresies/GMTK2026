@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     /// The current movement input from the player. This is a Vector2 representing the direction and magnitude of the player's movement input.
     /// </summary>
     private Vector2 moveInput;
+
+    private Vector2 lastMoveDir = Vector2.up;
     
     private bool isDashing = false;
     private float dashTimeRemaining = 0f;
@@ -60,6 +62,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="movementValue">The movement input value.</param>
     public void OnMove(InputValue movementValue)
     {
+        // Get last frames movement Direction, only if it wasn't "Zero"
+        // Default to up.
+        if (moveInput.magnitude > 0f)
+            lastMoveDir = moveInput;
         if (!isDashing)
         {
             moveInput = movementValue.Get<Vector2>().normalized;
@@ -99,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (healthTimer <= everyFiveSecondsTimer)
         {
             EveryFiveSeconds();
-            everyFiveSecondsTimer -= 5;
+            everyFiveSecondsTimer -= 1;
         }
         
         // Only fire if we are inputting to fire and the timer is 0. 
@@ -127,10 +133,10 @@ public class PlayerController : MonoBehaviour
         isDashing = isDashing && dashTimeRemaining > 0;
     }
 
-    private void Shoot(Vector2 _shootDir)
+    private void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
     {
         // Fire towards shootDir
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
                  
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(_shootDir * bulletSpeed,  ForceMode2D.Impulse);
@@ -142,7 +148,7 @@ public class PlayerController : MonoBehaviour
     private void EveryFiveSeconds()
     {
         // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
-        
+        /*
         // Implementation of Carmine Rook - Cardinal Shooting
         Shoot(Vector2.up);
         Shoot(Vector2.down);
@@ -154,6 +160,16 @@ public class PlayerController : MonoBehaviour
         Shoot((Vector2.up + Vector2.left).normalized);
         Shoot((Vector2.down + Vector2.right).normalized);
         Shoot((Vector2.down + Vector2.left).normalized);
-        
+        */
+        // Implementations of Carmine Knight - + shape in direction shooting/facing
+        Vector2 carmineKnightDir = Vector2.up;
+        if (shootDir.magnitude > 0f)
+            carmineKnightDir = shootDir;
+        Shoot(carmineKnightDir, new Vector3(0.5f, 0.5f));
+        Shoot(carmineKnightDir, new Vector3(-0.5f, 0.5f));
+        Shoot(carmineKnightDir);
+        Shoot(carmineKnightDir,  new Vector3(0, 0.5f));
+        Shoot(carmineKnightDir,  new Vector3(0, 1f));
+
     }
 }
