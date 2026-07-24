@@ -7,7 +7,7 @@ public class MoveToPlayerAi : MovementAi
     public override Vector3 GetMoveDirection()
     {
         // Move towards the player
-        if ((player.position - self.position).magnitude < stopDistance)
+        if (IsWithinStopDistance())
         {
             return Vector3.zero;
         }
@@ -15,5 +15,10 @@ public class MoveToPlayerAi : MovementAi
         {
             return (player.position - self.position).normalized;
         }
+    }
+
+    public bool IsWithinStopDistance()
+    {
+        return (player.position - self.position).magnitude < stopDistance;
     }
 }

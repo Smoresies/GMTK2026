@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 
     protected PlayerController player;
 
-    void Start()
+    protected void Start()
     {
         // Cache the Rigidbody2D component attached to the player
         rigidBody = GetComponent<Rigidbody2D>();
