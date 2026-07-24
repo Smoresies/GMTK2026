@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MagicPewPewCultistEnemy
   health: 10
   movementAi: {fileID: 726289248076268428}
-  moveSpeed: 10
+  moveSpeed: 300
   damage: 10
   timeBetweenShots: 3
   fireRange: 6
