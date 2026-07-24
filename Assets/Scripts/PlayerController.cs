@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(fireRateTimer);
         
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
