@@ -17,6 +17,9 @@ public class MovementAi : MonoBehaviour
         return Vector3.zero;
     }
 
-    
+    public virtual void OnCollision(Collision2D collision)
+    {
+        
+    }
 
 }

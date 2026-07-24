@@ -124,4 +124,9 @@ public class PlayerController : MonoBehaviour
         bullet.TryGetComponent(out BulletController bulletController);
         bulletController.SetDamage(bulletDamage);
     }
+
+    public virtual void TakeDamage(float damage)
+    {
+        Debug.Log("Player took " + damage + " damage");
+    }
 }

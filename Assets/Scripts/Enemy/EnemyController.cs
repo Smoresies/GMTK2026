@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         movementAi.initialize(FindAnyObjectByType<PlayerController>().transform, transform);
     }
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

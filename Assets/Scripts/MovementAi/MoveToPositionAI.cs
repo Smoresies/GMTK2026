@@ -35,4 +35,5 @@ public class MoveToPositionAI : MovementAi
             return (moveLocation - self.position).normalized;
         }
     }
+    
 }
