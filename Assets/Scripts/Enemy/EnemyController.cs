@@ -4,12 +4,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
-    private float health;
-    private Rigidbody2D rigidBody;
+    protected float health;
+    protected Rigidbody2D rigidBody;
     [SerializeField] 
-    private MovementAi movementAi;
+    protected MovementAi movementAi;
     [SerializeField]
-    private float moveSpeed = 5f;
+    protected float moveSpeed = 5f;
     void Start()
     {
         // Cache the Rigidbody2D component attached to the player
@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     }
 
     
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         rigidBody.linearVelocity = movementAi.GetMoveDirection() * moveSpeed * Time.fixedDeltaTime;
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);

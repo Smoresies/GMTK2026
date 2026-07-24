@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public class MagicPewPewCultistEnemy : MonoBehaviour
+public class MagicPewPewCultistEnemy : EnemyController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int damage = 0;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private float fireRate = 1f;
+
+    [SerializeField]
+    private float fireRange;
+
+    private void FixedUpdate()
     {
         
     }

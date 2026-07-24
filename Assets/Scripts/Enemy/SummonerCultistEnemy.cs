@@ -1,16 +1,6 @@
 using UnityEngine;
 
-public class SummonerCultistEnemy : MonoBehaviour
+public class SummonerCultistEnemy : EnemyController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
