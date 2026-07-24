@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 1478677876}
   - component: {fileID: 1478677875}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   health: 10
+  moveSpeed: 500
 --- !u!61 &1478677876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -581,7 +582,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -930,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770609450697954670, guid: 97cd247fb0a82064fb19212b20b64d12, type: 3}
       propertyPath: m_Mass
-      value: 999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6770609450697954670, guid: 97cd247fb0a82064fb19212b20b64d12, type: 3}
       propertyPath: m_BodyType
