@@ -378,5 +378,15 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Debug key pressed in player, completing level");
         LevelManager.OnDebug(inputValue);
     }
+
+    public void AddCurse(Curse curse)
+    {
+
+    }
+
+    public void AddRelic(Relic relic)
+    {
+
+    }
 }
 
