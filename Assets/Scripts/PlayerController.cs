@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-    }*/
+    }
 
     public void OnDebug(InputValue inputValue)
     {
