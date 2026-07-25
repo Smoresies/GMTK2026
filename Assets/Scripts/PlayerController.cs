@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float bulletSpeed = 10f;
 
     [SerializeField] private int bulletDamage = 1;
+    
+    [SerializeField] private GameObject explosionPrefab;
 
     public GameObject bulletPrefab;
 
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private float frozenTimeTimer = 0.0f;
     private float chronoBootsCD = 0.0f;
     public float chronoCharmCD = 0.0f;
+    public float chronoShieldCD = 0.0f;
+    public float chronoSwordCD = 0.0f;
 
     // This is the crit-related stuff
     private float critRate = 0.1f;
@@ -58,12 +62,16 @@ public class PlayerController : MonoBehaviour
     private bool carmineRook = false;
     private bool carmineBishop = false;
     private bool chronomancersBoots = false;
+    private bool chronomachersShield = false;
     private bool edPills = false;
+    private bool bombBelt = false;
+    private bool hasDubiousEnergy = false;
     
     // Needed externally for Bullets
     public bool hasRippedClover { get; private set; } = false;
     public bool hasWeightedDie { get; private set; } = false;
     public bool hasChronoCharm { get; private set; } = false;
+    public bool hasChronoSword { get; private set; } = false;
 
     // Needed just... fucking... everywhere.
     public bool hasTrickstersDeck { get; private set; } = false;
@@ -75,6 +83,9 @@ public class PlayerController : MonoBehaviour
     {
         // Cache the Rigidbody2D component attached to the player
         rigidBody = GetComponent<Rigidbody2D>();
+
+        bombBelt = true;
+        hasDubiousEnergy = true;
     }
 
     /// <summary>
@@ -124,7 +135,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // print(healthTimer);
+        //Debug.Log(healthTimer);
+        
         if (healthTimer <= everyFiveSecondsTimer)
         {
             EveryFiveSeconds();
@@ -178,11 +190,11 @@ public class PlayerController : MonoBehaviour
                 bullet.transform.localScale *= 2f;
         }
     }
-    
+    /*
     public virtual void TakeDamage(float damage)
     {
         Debug.Log("Player took " + damage + " damage");
-    }
+    }*/
 
     public Rigidbody2D GetRigidbody()
     {
@@ -227,18 +239,33 @@ public class PlayerController : MonoBehaviour
                 Shoot(carmineKnightDir, new Vector3(0, 0.5f));
                 Shoot(carmineKnightDir, new Vector3(0, 1f));
             }
+            
+            if (hasDubiousEnergy)
+            {
+                GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
+                explo.GetComponent<ExplosionManager>().SetDamage(bulletDamage * 0.5f);
+            }
         }
     }
 
     private void dashingRelics()
     {
+        if (!isDashing)
+            return;
+        
         // Implementation for Chronomancer's Boots. Freeze for 0.5s
-        if (chronomancersBoots && frozenTimeTimer > 0f && isDashing && chronoBootsCD <= 0f)
+        if (chronomancersBoots && frozenTimeTimer > 0f && chronoBootsCD <= 0f)
         {
             chronoBootsCD = relicCDs;
             freezeTime();
             if (hasTrickstersDeck)
                 freezeTime();
+        }
+
+        if (bombBelt)
+        {
+            GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
+            explo.GetComponent<ExplosionManager>().SetDamage(bulletDamage * 0.5f);
         }
     }
 
@@ -258,6 +285,8 @@ public class PlayerController : MonoBehaviour
     {
         chronoBootsCD -= Time.deltaTime;
         chronoCharmCD -= Time.deltaTime;
+        chronoShieldCD -= Time.deltaTime;
+        chronoSwordCD -= Time.deltaTime;
     }
 
     // Call this when the player gets the Wizard Coke Relic.
@@ -274,16 +303,24 @@ public class PlayerController : MonoBehaviour
             critDamage = 2.0f;
     }
 
-    /*
+    
     public void TakeDamage(float damage)
     {
         healthTimer -= damage;
+        if (chronomachersShield && chronoShieldCD <= 0.0f)
+        {
+            freezeTime();
+            if(hasTrickstersDeck)
+                freezeTime();
+            chronoShieldCD = relicCDs;
+        }
+            
         Debug.Log(healthTimer);
         if (healthTimer <= 0)
         {
             // Eventually add some like. Art/effect here
             Destroy(gameObject);
         }
-    }*/
+    }
 }
 

@@ -10,13 +10,21 @@ public class BulletController : MonoBehaviour
    private float _critRate = 0.0f;
    private float _critDamage = 1.0f;
 
+   [SerializeField] 
+   private GameObject explosionPrefab;
+
    private void OnCollisionEnter2D(Collision2D collision)
    {
 
       if (collision.gameObject.TryGetComponent(out EnemyController enemy))
       {
          PlayerController pc = GameObject.FindAnyObjectByType<PlayerController>();
-
+         
+         
+         // Test spot for Explosion
+         GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
+         explo.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
+         
          // THIS IS LIKELY MASSIVELY OVER-FUCKING-POWERED
          if (pc.hasWeightedDie)
             if (pc.hasTrickstersDeck)
@@ -43,6 +51,8 @@ public class BulletController : MonoBehaviour
             // Jagged Charm
             
             // Lightning Charm
+            GameObject explode = Instantiate(explosionPrefab, transform.position, transform.rotation);
+            explode.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
             
             // Chronomancer's Charm
             if (pc.hasChronoCharm)
@@ -54,6 +64,8 @@ public class BulletController : MonoBehaviour
                   if (i + 1 == attacks)
                      pc.chronoCharmCD = pc.relicCDs;
                   pc.freezeTime();
+                  if(pc.hasTrickstersDeck)
+                     pc.freezeTime();
                }
             }
                

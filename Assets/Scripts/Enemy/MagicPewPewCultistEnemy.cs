@@ -22,7 +22,7 @@ public class MagicPewPewCultistEnemy : EnemyController
     {
         base.FixedUpdate();
         timeBeforeNextShot -= Time.fixedDeltaTime;
-        Debug.Log("Time before next shot: " + timeBeforeNextShot);
+        // Debug.Log("Time before next shot: " + timeBeforeNextShot);
         if (timeBeforeNextShot < 0f && (rigidBody.position - player.GetRigidbody().position).magnitude < fireRange)
         {
             FireBullet();

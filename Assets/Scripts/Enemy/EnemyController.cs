@@ -25,6 +25,14 @@ public class EnemyController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            if (player.hasChronoSword && player.chronoSwordCD <= 0f)
+            {
+                player.freezeTime();
+                if(player.hasTrickstersDeck)
+                    player.freezeTime();
+                player.chronoSwordCD = player.relicCDs;
+            }
+            
             // Eventually add some like. Art/effect here
             Destroy(gameObject);
         }
