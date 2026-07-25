@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(fireRateTimer);
         
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
@@ -124,5 +123,15 @@ public class PlayerController : MonoBehaviour
 
         bullet.TryGetComponent(out BulletController bulletController);
         bulletController.SetDamage(bulletDamage);
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        Debug.Log("Player took " + damage + " damage");
+    }
+
+    public Rigidbody2D GetRigidbody()
+    {
+        return rigidBody;
     }
 }
