@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private ShopManager shopManager;
     [SerializeField]
-    private List<RoomPrefabWithWeight> listOfPrefabsWithWeights;
+    private List<WeightedObject<GameObject>> listOfPrefabsWithWeights;
     [SerializeField]
     private GameObject firstRoomPrefab;
     [SerializeField]
@@ -18,32 +18,12 @@ public class LevelManager : MonoBehaviour
     private GameObject instantiatedLevel;
     private Queue<GameObject> roomQueue = new Queue<GameObject>();
 
-    [Serializable]
-    public struct RoomPrefabWithWeight
-    {
-        public GameObject prefab;
-        public int weight;
-    }
     void Awake()
     {
-        int totalWeight = 0;
-        foreach (RoomPrefabWithWeight room in listOfPrefabsWithWeights)
-        {
-            totalWeight += room.weight;
-        }
         roomQueue.Enqueue(firstRoomPrefab);
         for (int i = 0; i < totalNumberOfRooms - 2; i++)
         {
-            int randomWeight = UnityEngine.Random.Range(0, totalWeight);
-            foreach (RoomPrefabWithWeight room in listOfPrefabsWithWeights)
-            {
-                randomWeight -= room.weight;
-                if (randomWeight <= 0)
-                {
-                    roomQueue.Enqueue(room.prefab);
-                    break;
-                }
-            }
+            roomQueue.Enqueue(Utils.GetRandomWeightedObject(listOfPrefabsWithWeights).item);
         }
         roomQueue.Enqueue(lastRoomPrefab);
         SetNextRoom();
