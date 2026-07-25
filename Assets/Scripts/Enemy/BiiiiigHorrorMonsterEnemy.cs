@@ -9,7 +9,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
     private int attackDamage = 1;
 
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
         timeBeforeNextAttack -= Time.fixedDeltaTime;

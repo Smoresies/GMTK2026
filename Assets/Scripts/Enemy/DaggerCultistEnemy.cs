@@ -15,7 +15,7 @@ public class DaggerCultistEnemy : EnemyController
     private float distanceToPlayer;
     [SerializeField]
     private float attackDistance;
-    protected void Start()
+    protected override void Start()
     {
         base.Start();
         moveToPositionAi.initialize(player.transform, transform);
@@ -30,7 +30,7 @@ public class DaggerCultistEnemy : EnemyController
         Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
         timeBeforeNextAttack -= Time.fixedDeltaTime;
