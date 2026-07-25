@@ -25,7 +25,22 @@ public class EnemyController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            if (player.hasChronoSword && player.chronoSwordCD <= 0f)
+            {
+                player.freezeTime();
+                if(player.hasTrickstersDeck)
+                    player.freezeTime();
+                player.chronoSwordCD = player.relicCDs;
+            }
+            
             // Eventually add some like. Art/effect here
+            if (player.hasBottledRage)
+            {
+                GameObject explo = Instantiate(player.ExplosionPrefab, transform.position, transform.rotation);
+                explo.GetComponent<ExplosionManager>().SetDamage(player.BulletDamage * 0.5f);
+            }
+                
+            
             Destroy(gameObject);
         }
             
