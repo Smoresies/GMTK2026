@@ -41,7 +41,7 @@ public class BulletController : MonoBehaviour
             if (pc.hasRippedClover) 
                attacks = pc.hasTrickstersDeck ? 4 : 2;
             didCrit = true;
-         } else if(pc.hasWeightedDie)
+         } else if(pc.hasWeightedDie) 
             _damage /= 2;
          
          for (int i = 0; i < attacks; ++i)

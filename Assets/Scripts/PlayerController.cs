@@ -23,7 +23,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int bulletDamage = 1;
     
+    public int BulletDamage => bulletDamage;
+    
     [SerializeField] private GameObject explosionPrefab;
+
+    public GameObject ExplosionPrefab => explosionPrefab;
 
     public GameObject bulletPrefab;
 
@@ -72,6 +76,8 @@ public class PlayerController : MonoBehaviour
     public bool hasWeightedDie { get; private set; } = false;
     public bool hasChronoCharm { get; private set; } = false;
     public bool hasChronoSword { get; private set; } = false;
+    
+    public bool hasBottledRage { get; private set; } = false;
 
     // Needed just... fucking... everywhere.
     public bool hasTrickstersDeck { get; private set; } = false;
@@ -85,7 +91,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         bombBelt = true;
-        hasDubiousEnergy = true;
+        // hasDubiousEnergy = true;
     }
 
     /// <summary>

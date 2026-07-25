@@ -48,14 +48,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ac411ec854e3e4b89b1c5855557634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  healthTimer: 600
   moveSpeed: 500
   dashSpeed: 2500
   dashDuration: 0.2
   dashCooldown: 1
+  rigidBody: {fileID: 0}
   fireRate: 0.5
   bulletSpeed: 10
   bulletDamage: 1
+  explosionPrefab: {fileID: 7912660409315329846, guid: 0d3e6e8d7ad5c9347900e5343b2ed229, type: 3}
   bulletPrefab: {fileID: 6754795878463848348, guid: 56a8b1b63163acf4b955ba28a84786bc, type: 3}
+  chronoCharmCD: 0
+  chronoShieldCD: 0
+  chronoSwordCD: 0
 --- !u!61 &6978100292020004859
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,13 @@ public class EnemyController : MonoBehaviour
             }
             
             // Eventually add some like. Art/effect here
+            if (player.hasBottledRage)
+            {
+                GameObject explo = Instantiate(player.ExplosionPrefab, transform.position, transform.rotation);
+                explo.GetComponent<ExplosionManager>().SetDamage(player.BulletDamage * 0.5f);
+            }
+                
+            
             Destroy(gameObject);
         }
             
