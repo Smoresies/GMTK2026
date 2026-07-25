@@ -18,7 +18,7 @@ public class MagicPewPewCultistEnemy : EnemyController
     
     [SerializeField]
     private int bulletDamage = 1;
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
         timeBeforeNextShot -= Time.fixedDeltaTime;

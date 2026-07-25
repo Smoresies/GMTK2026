@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
     }
 
     
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         rigidBody.linearVelocity = movementAi.GetMoveDirection() * moveSpeed * Time.fixedDeltaTime;
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
