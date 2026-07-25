@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 shootDir = Vector2.zero;
     private float fireRateTimer = 0f;
     private int everyFiveSecondsTimer = 595;
+    private float slownessTimer = 0.0f;
 
     public float relicCDs { get; private set; } = 5.0f;
 
@@ -91,6 +92,8 @@ public class PlayerController : MonoBehaviour
     
     
     // CURSES
+    private bool curse4 = false;
+    private bool curse5 = false;
     private bool curse6 = false;
     private bool curse8 = false;
     private bool curse9 = false;
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
         // Cache the Rigidbody2D component attached to the player
         rigidBody = GetComponent<Rigidbody2D>();
 
-        bombBelt = true;
+        // bombBelt = true;
         // hasDubiousEnergy = true;
     }
 
@@ -148,6 +151,9 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashingRelics();
             dashTimeRemaining = dashDuration;
+            
+            if(curse4)
+                slownessTimer = 3.0f;
         }
     }
 
@@ -177,7 +183,8 @@ public class PlayerController : MonoBehaviour
         // This needs a check to make sure the Room Challenge has begun
         // Otherwise it will constantly go down regardless.
         if (frozenTimeTimer <= 0.0f)
-            healthTimer -= Time.deltaTime * (hasFotOO ? timeRate : 1.0f);
+            healthTimer -= (Time.deltaTime * (hasFotOO ? timeRate : 1.0f)) * 
+                           ((curse5 && moveInput.magnitude == 0 && !isDashing) ? 2.0f : 1.0f);
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
@@ -185,7 +192,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentSpeed = isDashing ? dashSpeed : moveSpeed;
+        // Adds the ability to be "slowed"
+        float currentSpeed = (isDashing ? dashSpeed : moveSpeed) * (slownessTimer > 0f ? 0.5f : 1.0f);
         rigidBody.linearVelocity = moveInput * (currentSpeed * Time.fixedDeltaTime);
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
         dashTimeRemaining -= Time.fixedDeltaTime;
@@ -227,6 +235,13 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
         int repeats = hasTrickstersDeck ? 1 : 2;
 
+        // Every 5 seconds is now skipped. We can go back to main loop and also do an extra decrement.
+        if (curse9)
+        {
+            healthTimer -= 1;
+            return;
+        }
+        
         if (curse8)
         {
             GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
@@ -234,12 +249,7 @@ public class PlayerController : MonoBehaviour
             explo.GetComponent<ExplosionManager>().SetTargetsPlayer();
         }
 
-        // Every 5 seconds is now skipped. We can go back to main loop and also do an extra decrement.
-        if (curse9)
-        {
-            healthTimer -= 1;
-            return;
-        }
+        
 
         for (int i = 0; i < repeats; ++i)
         {
@@ -321,6 +331,7 @@ public class PlayerController : MonoBehaviour
         chronoCharmCD -= Time.deltaTime;
         chronoShieldCD -= Time.deltaTime;
         chronoSwordCD -= Time.deltaTime;
+        slownessTimer -= Time.deltaTime;
     }
 
     // Call this when the player gets the Wizard Coke Relic.
