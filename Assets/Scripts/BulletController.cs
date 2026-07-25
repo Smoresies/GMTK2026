@@ -68,7 +68,7 @@ public class BulletController : MonoBehaviour
       Destroy(gameObject);
    }
 
-   public void SetDamage(float damage, float critRate,  float critDamage)
+   public void SetDamage(float damage, float critRate = 0.0f,  float critDamage = 1.0f)
    {
       if(damage > 0)
          this._damage = damage;
