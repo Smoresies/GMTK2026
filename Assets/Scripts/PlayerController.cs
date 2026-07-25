@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour
     private float critRate = 0.1f;
     private float critDamage = 1.5f;
 
+    // Used with Flower of the Old One
+    private float timeRate = 0.8f;
+
     /// <summary>
     /// THIS IS THE LIST OF ALL OF THE RELIC BOOLEANS
     /// </summary>
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
     private bool edPills = false;
     private bool bombBelt = false;
     private bool hasDubiousEnergy = false;
+    private bool hasFotOO = false;
     
     // Needed externally for Bullets
     public bool hasRippedClover { get; private set; } = false;
@@ -84,6 +88,12 @@ public class PlayerController : MonoBehaviour
 
     // Temporal Paradoxes for Dummies
     private bool TPfD = false;
+    
+    
+    // CURSES
+    private bool curse6 = false;
+    private bool curse8 = false;
+    private bool curse9 = false;
 
     public LevelManager LevelManager;
 
@@ -156,6 +166,8 @@ public class PlayerController : MonoBehaviour
             if (fireRateTimer <= 0f)
             {
                 Shoot(shootDir);
+                
+                // BOX OF CANDIED FINGERS IMPLEMENTED HERE
                 fireRateTimer = fireRate;
             }
 
@@ -165,7 +177,7 @@ public class PlayerController : MonoBehaviour
         // This needs a check to make sure the Room Challenge has begun
         // Otherwise it will constantly go down regardless.
         if (frozenTimeTimer <= 0.0f)
-            healthTimer -= Time.deltaTime;
+            healthTimer -= Time.deltaTime * (hasFotOO ? timeRate : 1.0f);
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
@@ -186,7 +198,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(_shootDir * bulletSpeed, ForceMode2D.Impulse);
+        rb.AddForce(_shootDir * (bulletSpeed * (curse6 ? 0.5f : 1.0f)), ForceMode2D.Impulse);
 
         bullet.TryGetComponent(out BulletController bulletController);
         bulletController.SetDamage(bulletDamage, critRate, critDamage);
@@ -214,6 +226,20 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("EveryFiveSeconds Triggered: " + everyFiveSecondsTimer);
         int repeats = hasTrickstersDeck ? 1 : 2;
+
+        if (curse8)
+        {
+            GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
+            explo.GetComponent<ExplosionManager>().SetDamage(bulletDamage * 0.5f);
+            explo.GetComponent<ExplosionManager>().SetTargetsPlayer();
+        }
+
+        // Every 5 seconds is now skipped. We can go back to main loop and also do an extra decrement.
+        if (curse9)
+        {
+            healthTimer -= 1;
+            return;
+        }
 
         for (int i = 0; i < repeats; ++i)
         {
@@ -314,7 +340,11 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        healthTimer -= damage;
+        if (hasFotOO)
+            timeRate += 0.1f;
+        else
+            healthTimer -= damage;
+        
         if (chronomachersShield && chronoShieldCD <= 0.0f)
         {
             freezeTime();
