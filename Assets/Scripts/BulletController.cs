@@ -1,7 +1,4 @@
-using System;
-using UnityEditor.UI;
 using UnityEngine;
-using Random = System.Random;
 
 public class BulletController : MonoBehaviour
 {

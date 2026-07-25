@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
     // Temporal Paradoxes for Dummies
     private bool TPfD = false;
 
+    public LevelManager LevelManager;
+
     void Start()
     {
         // Cache the Rigidbody2D component attached to the player
@@ -285,5 +287,11 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }*/
+
+    public void OnDebug(InputValue inputValue)
+    {
+        Debug.Log("Debug key pressed in player, completing level");
+        LevelManager.OnDebug(inputValue);
+    }
 }
 
