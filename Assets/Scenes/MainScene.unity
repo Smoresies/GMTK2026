@@ -4804,7 +4804,7 @@ MonoBehaviour:
     weight: 1
   firstRoomPrefab: {fileID: 11400000, guid: b265f2e0de1b72e46b3fb9bcb6d7acfd, type: 2}
   lastRoomPrefab: {fileID: 11400000, guid: 89dd96ad080f3304d87926526aab7bc4, type: 2}
-  totalNumberOfRooms: 2
+  totalNumberOfRooms: 10
   enemyPrefabList:
   - item: {fileID: 8628614583826300223, guid: 776a5ba24c805cd4fb342945e9826848, type: 3}
     weight: 1
