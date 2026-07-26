@@ -660,6 +660,8 @@ MonoBehaviour:
     weight: 1
   - item: {fileID: 11400000, guid: 2705fe6138fe93947888c167c2c0bc5b, type: 2}
     weight: 1
+  - item: {fileID: 11400000, guid: 3652496afe6c27c4681cd93adbd2fbf5, type: 2}
+    weight: 1
   regularCurses:
   - item: {fileID: 11400000, guid: e04558258ef11164387e7dbbbe7ab91f, type: 2}
     weight: 1

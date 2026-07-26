@@ -59,6 +59,7 @@ public class ShopManager : MonoBehaviour
     private int slotCost3 = 45;
 
     private bool didBuy = false;
+    private bool tongueReroll = false;
 
     void Awake()
     {
@@ -82,9 +83,11 @@ public class ShopManager : MonoBehaviour
         choseSlot2 = false;
         choseSlot3 = false;
         didBuy = false;
-        slotCost1 = 15 + (playerController.curse3 ? 15 : 0);
-        slotCost2 = 30 + (playerController.curse3 ? 15 : 0);
-        slotCost3 = 45 + (playerController.curse3 ? 15 : 0);
+        if (playerController.hasTongue)
+            tongueReroll = true;
+        slotCost1 = 15 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
+        slotCost2 = 30 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
+        slotCost3 = 45 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
         relic1 = Utils.GetRandomWeightedObject(regularRelics);
         regularRelics.Remove(relic1);
         relic2 = Utils.GetRandomWeightedObject(regularRelics);
@@ -149,7 +152,8 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Curse> newCurse = Utils.GetRandomWeightedObject(regularCurses);
             regularCurses.Remove(newCurse);
 
-            slotCost1 += 15;
+            if(!tongueReroll)
+                slotCost1 += 15;
             
             if (choseSlot1)
             {
@@ -177,7 +181,8 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Curse> newCurse = Utils.GetRandomWeightedObject(regularCurses);
             regularCurses.Remove(newCurse);
             
-            slotCost2 += 15;
+            if(!tongueReroll)
+                slotCost2 += 15;
             
             if (choseSlot2)
             {
@@ -200,7 +205,8 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Relic> newPair = Utils.GetRandomWeightedObject(legendaryRelicCursePairs);
             legendaryRelicCursePairs.Remove(newPair);
             
-            slotCost3 += 15;
+            if(!tongueReroll)
+                slotCost3 += 15;
             
             if (choseSlot3)
             {
@@ -214,6 +220,8 @@ public class ShopManager : MonoBehaviour
             relicImage3.sprite = newPair.item.relicSprite;
             relicText3.text = slotCost3 + " Health\n" + legendaryRelicCursePair.item.relicName + "\n"  + legendaryRelicCursePair.item.relicDescription;
         }
+
+        tongueReroll = false;
     }
 
     public void EndShop()
