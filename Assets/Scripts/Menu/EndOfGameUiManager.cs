@@ -6,17 +6,38 @@ using UnityEngine.UI;
 public class EndOfGameUiManager : MonoBehaviour
 {
     [SerializeField]
+    private LevelManager levelManager;
+    [SerializeField]
     private GameObject endOfGameUiPanel;
     [SerializeField]
-    private Button restartButton;
+    private Button goToMenuButton;
     [SerializeField]
     private PlayerController playerController;
+    [SerializeField]
+    private GameObject winGameText;
+    [SerializeField]
+    private GameObject loseGameText;
 
     void Awake()
     {
+        winGameText.SetActive(false);
+        loseGameText.SetActive(false);
         endOfGameUiPanel.SetActive(false);
-        restartButton.onClick.AddListener(Restart);
-        playerController.OnDeath += ShowMenu;
+        goToMenuButton.onClick.AddListener(GoToMenu);
+        playerController.OnDeath += OnLose;
+        levelManager.OnWinGame += OnWin;
+    }
+
+    private void OnLose()
+    {
+        loseGameText.SetActive(true);
+        ShowMenu();
+    }
+
+    private void OnWin()
+    {
+        ShowMenu();
+        winGameText.SetActive(true);
     }
 
     private void ShowMenu()
@@ -24,7 +45,7 @@ public class EndOfGameUiManager : MonoBehaviour
         endOfGameUiPanel.SetActive(true);
     }
 
-    private void Restart()
+    private void GoToMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
