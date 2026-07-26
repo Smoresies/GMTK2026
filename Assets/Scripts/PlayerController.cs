@@ -440,6 +440,11 @@ public class PlayerController : MonoBehaviour
         LevelManager.OnDebug(inputValue);
     }
 
+    public float GetTimer()
+    {
+        return healthTimer;
+    }
+
     public void AddCurse(Curse curse)
     {
         switch (curse.curseIdentifier)
