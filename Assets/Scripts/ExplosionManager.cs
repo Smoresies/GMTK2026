@@ -16,7 +16,7 @@ public class ExplosionManager : MonoBehaviour
         PlayerController pc = GameObject.FindAnyObjectByType<PlayerController>();
         
         ParticleSystemRenderer psRenderer = GetComponent<ParticleSystemRenderer>();
-        psRenderer.material.SetColor("_EmissionColor", Color.red);
+        psRenderer.material.SetColor("_Color", Color.red);
         particles = gameObject.GetComponent<ParticleSystem>();
         particles.Play(true);
         coll = gameObject.GetComponent<Collider2D>();
