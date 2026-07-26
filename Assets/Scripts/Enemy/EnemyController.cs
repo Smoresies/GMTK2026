@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
             
     }
 
-    private void Die()
+    protected void Die()
     {
         OnDeathEvent?.Invoke();
         Destroy(gameObject);

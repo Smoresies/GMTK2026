@@ -51,7 +51,6 @@ public class DaggerCultistEnemy : EnemyController
             Debug.Log(this.name + " attacked player for " + damage + " damage");
             initNewMovementAi(moveAwayFromPlayerAi);
             timeBeforeNextDecision = timeBetweenDecisions + Random.Range(-variableDecisionTime, variableDecisionTime);
-
         }
         // Debug.Log("Time before next shot: " + timeBeforeNextShot);
         if (timeBeforeNextDecision < 0f)

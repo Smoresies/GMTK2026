@@ -46,9 +46,9 @@ public class LevelManager : MonoBehaviour
         int enemyNum = (int)(UnityEngine.Random.Range(2, 5) * (player.curse7 ? 1.5f : 1.0f));
         for(int i =0; i < enemyNum; i++)
         {
-            enemies.Add(daggerCultistEnemyPrefab);
+            enemies.Add(biiiiigHorrorMonsterEnemyPrefab);
         }
-        nextRoom.Init(enemies, CompleteLevel);
+        nextRoom.Init(this, enemies, CompleteLevel);
     }
 
     private void CompleteLevel()

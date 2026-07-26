@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6140982821819243691}
   - component: {fileID: 4392236019840072423}
   - component: {fileID: 5222293135599385950}
-  - component: {fileID: 4303307244645689571}
+  - component: {fileID: 7218651711444926080}
   m_Layer: 8
   m_Name: LittleHorrorMonster
   m_TagString: Untagged
@@ -53,6 +53,7 @@ MonoBehaviour:
   moveSpeed: 500
   damage: 10
   explosionPrefab: {fileID: 7912660409315329846, guid: 0d3e6e8d7ad5c9347900e5343b2ed229, type: 3}
+  attackDistance: 1.2
 --- !u!114 &6140982821819243691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +153,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!58 &4303307244645689571
-CircleCollider2D:
+--- !u!61 &7218651711444926080
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,9 +183,19 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
