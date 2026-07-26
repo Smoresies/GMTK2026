@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int BulletDamage => bulletDamage;
     
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject bombPrefab;
 
     public GameObject ExplosionPrefab => explosionPrefab;
 
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private bool isFiring = false;
     private Vector2 shootDir = Vector2.zero;
     private float fireRateTimer = 0f;
-    private int everyFiveSecondsTimer = 595;
+    private float everyFiveSecondsTimer = 5.0f;
     private float slownessTimer = 0.0f;
 
     public float relicCDs { get; private set; } = 5.0f;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
     private bool bombBelt = false;
     private bool hasDubiousEnergy = false;
     private bool hasFotOO = false;
+    private bool hasQuill = false;
     
     // Needed externally for Bullets
     public bool hasRippedClover { get; private set; } = false;
@@ -87,19 +89,24 @@ public class PlayerController : MonoBehaviour
 
     // Needed just... fucking... everywhere.
     public bool hasTrickstersDeck { get; private set; } = false;
+    public bool hasMembership { get; private set; } = false;
+    public bool hasTongue { get; private set; } = false;
 
     // Temporal Paradoxes for Dummies
     private bool TPfD = false;
     
     
     // CURSES
+    public bool curse2 { get; private set; } = false;
     public bool curse3 { get; private set; } = false;
     private bool curse4 = false;
     private bool curse5 = false;
     private bool curse6 = false;
+    public bool curse7 { get; private set; } = false;
     private bool curse8 = false;
     private bool curse9 = false;
     public bool curse12 { get; private set; } = false;
+    
     public bool curse16 { get; private set; } = false;
     
     public LevelManager LevelManager;
@@ -165,10 +172,10 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log(healthTimer);
         
-        if (healthTimer <= everyFiveSecondsTimer)
+        if (everyFiveSecondsTimer <= 0f)
         {
             EveryFiveSeconds();
-            everyFiveSecondsTimer -= 5;
+            everyFiveSecondsTimer = 5f;
         }
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
@@ -187,8 +194,13 @@ public class PlayerController : MonoBehaviour
         // This needs a check to make sure the Room Challenge has begun
         // Otherwise it will constantly go down regardless.
         if (frozenTimeTimer <= 0.0f)
+        {
             healthTimer -= (Time.deltaTime * (hasFotOO ? timeRate : 1.0f)) * 
-                           ((curse5 && moveInput.magnitude == 0 && !isDashing) ? 2.0f : 1.0f);
+                                    ((curse5 && moveInput.magnitude == 0 && !isDashing) ? 2.0f : 1.0f) *
+                                    ((hasQuill) ? 2.0f : 1.0f);
+            everyFiveSecondsTimer -= Time.deltaTime;
+        }
+            
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
@@ -248,9 +260,8 @@ public class PlayerController : MonoBehaviour
         
         if (curse8)
         {
-            GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
-            explo.GetComponent<ExplosionManager>().SetDamage(bulletDamage * 0.5f);
-            explo.GetComponent<ExplosionManager>().SetTargetsPlayer();
+            GameObject bomb = Instantiate(bombPrefab, transform.position, transform.rotation);
+            bomb.GetComponent<Bomb>()._damage = bulletDamage;
         }
 
         
@@ -392,6 +403,9 @@ public class PlayerController : MonoBehaviour
     {
         switch (curse.curseIdentifier)
         {
+            case 2:
+                curse2 = true;
+                break;
             case 3:
                 curse3 = true;
                 break;
@@ -403,6 +417,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case 6:
                 curse6 = true;
+                break;
+            case 7:
+                curse7 = true;
                 break;
             case 8:
                 curse8 = true;
@@ -468,6 +485,12 @@ public class PlayerController : MonoBehaviour
             case "Bombardier's Belt":
                 bombBelt = true;
                 break;
+            case "Bloodstained Membership Card":
+                hasMembership = true;
+                break;
+            case "Tongue of Karen":
+                hasTongue = true;
+                break;
             case "Flower of the Old One":
                 hasFotOO = true;
                 break;
@@ -478,10 +501,20 @@ public class PlayerController : MonoBehaviour
                 hasTrickstersDeck = true;
                 break;
             case "Ripped Clover Charm":
+                CritUpdate();
+                CritUpdate();
                 hasRippedClover = true;
                 break;
+            case "Cerulean Quill":
+                fireRate *= 1.5f;
+                moveSpeed *= 1.5f;
+                hasQuill = true;
+                break;
+            case "Weighted Die":
+                hasWeightedDie = true;
+                break;
             default:
-                Debug.Log("Shit's Fucked");
+                Debug.Log("Shit's Fucked " + relic.relicName);
                 break;
         }
     }

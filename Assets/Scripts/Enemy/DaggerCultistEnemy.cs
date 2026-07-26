@@ -10,8 +10,6 @@ public class DaggerCultistEnemy : EnemyController
     private float timeBetweenAttacks = 3f;
     private float timeBeforeNextAttack = 0f;
     [SerializeField]
-    private int attackDamage = 1;
-    [SerializeField]
     private float distanceToPlayer;
     [SerializeField]
     private float attackDistance;
@@ -41,8 +39,8 @@ public class DaggerCultistEnemy : EnemyController
 
             if ((player.transform.position - transform.position).magnitude < attackDistance)
             {
-                player.TakeDamage(attackDamage);
-                Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
+                player.TakeDamage(damage);
+                Debug.Log(this.name + " attacked player for " + damage + " damage");
             }
         }
         else if (movementAi == noMovementAi && timeBeforeNextAttack < 0f)

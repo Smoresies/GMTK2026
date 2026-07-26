@@ -12,21 +12,14 @@ public class BulletController : MonoBehaviour
 
    private void OnCollisionEnter2D(Collision2D collision)
    {
-
+      PlayerController pc = GameObject.FindAnyObjectByType<PlayerController>();
       if (collision.gameObject.TryGetComponent(out EnemyController enemy))
       {
-         PlayerController pc = GameObject.FindAnyObjectByType<PlayerController>();
-         
-         
-         // Test spot for Explosion
-         GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
-         explo.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
+        
+
          
          // THIS IS LIKELY MASSIVELY OVER-FUCKING-POWERED
          if (pc.hasWeightedDie)
-            if (pc.hasTrickstersDeck)
-               _critRate *= 4.0f;
-            else
                _critRate *= 2.0f;
          
          
@@ -74,7 +67,7 @@ public class BulletController : MonoBehaviour
             
       } else if (collision.gameObject.TryGetComponent(out PlayerController player))
       {
-         if (UnityEngine.Random.Range(0.0f, 1.0f) <= this._critRate)
+         if (pc.hasRippedClover && UnityEngine.Random.Range(0.0f, 1.0f) <= 0.25)
             _damage *= _critDamage;
          player.TakeDamage(_damage);
       }
