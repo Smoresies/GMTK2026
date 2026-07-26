@@ -15,7 +15,8 @@ public class LevelManager : MonoBehaviour
     private Level firstRoomPrefab;
     [SerializeField]
     private Level lastRoomPrefab;
-    [SerializeField][Min(2)]
+    [SerializeField]
+    [Min(2)]
     private int totalNumberOfRooms = 5;
     private Queue<Level> roomQueue = new Queue<Level>();
     [SerializeField]
@@ -51,18 +52,31 @@ public class LevelManager : MonoBehaviour
         List<GameObject> enemies = new List<GameObject>();
         PlayerController player = FindAnyObjectByType<PlayerController>();
         int enemyNum = (int)(UnityEngine.Random.Range(minNumEnemies, maxNumEnemies + 1) * (player.curse7 ? 1.5f : 1.0f));
-        for(int i =0; i < enemyNum; i++)
+        for (int i = 0; i < enemyNum; i++)
         {
             enemies.Add(Utils.GetRandomWeightedObject(enemyPrefabList).item);
         }
         nextRoom.Init(this, enemies, CompleteLevel);
     }
 
+    private void WinGame()
+    {
+        Debug.Log("You win");
+    }
+
     private void CompleteLevel()
     {
         Time.timeScale = 0;
-        shopManager.EnableShop();
-        audioManager.ShopTime();
+
+        if (roomQueue.Count == 0)
+        {
+            WinGame();
+        }
+        else
+        {
+            shopManager.EnableShop();
+            audioManager.ShopTime();
+        }
     }
 
 }
