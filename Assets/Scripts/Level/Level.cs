@@ -29,6 +29,9 @@ public class Level : ScriptableObject
         {
             GameObject enemy = Instantiate(enemyPrefab, level.transform);
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            PlayerController player = FindAnyObjectByType<PlayerController>();
+            if(player.curse2)
+                enemyController.Curse2();
             enemy.transform.position = GetRandomSpawnLocation();
             enemyController.OnDeathEvent += EnemyDied;
             numEnemiesRemaining++;

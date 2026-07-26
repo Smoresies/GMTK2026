@@ -3,9 +3,6 @@ using UnityEngine;
 public class MagicPewPewCultistEnemy : EnemyController
 {
     [SerializeField]
-    private int damage = 0;
-
-    [SerializeField]
     private float timeBetweenShots = 1f;
 
     [SerializeField]

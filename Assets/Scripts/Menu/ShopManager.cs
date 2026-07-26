@@ -75,7 +75,6 @@ public class ShopManager : MonoBehaviour
 
     public void EnableShop()
     {
-        Time.timeScale = 0;
         rerollSlot1Button.interactable = true;
         rerollSlot2Button.interactable = true;
         rerollSlot3Button.interactable = true;
@@ -108,7 +107,7 @@ public class ShopManager : MonoBehaviour
     public void DisableShop()
     {
         shopUI.SetActive(false);
-        Time.timeScale = 1;
+        
     }
     public void ChooseSlot(int slotIndex)
     {

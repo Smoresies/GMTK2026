@@ -39,9 +39,12 @@ public class LevelManager : MonoBehaviour
 
     private void SetNextRoom()
     {
+        Time.timeScale = 1;
         Level nextRoom = roomQueue.Dequeue();
         List<GameObject> enemies = new List<GameObject>();
-        for(int i =0; i < UnityEngine.Random.Range(1, 5); i++)
+        PlayerController player = FindAnyObjectByType<PlayerController>();
+        int enemyNum = (int)(UnityEngine.Random.Range(2, 5) * (player.curse7 ? 1.5f : 1.0f));
+        for(int i =0; i < enemyNum; i++)
         {
             enemies.Add(magicPewPewCultistEnemyPrefab);
         }
@@ -50,6 +53,7 @@ public class LevelManager : MonoBehaviour
 
     private void CompleteLevel()
     {
+        Time.timeScale = 0;
         shopManager.EnableShop();
     }
 

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int BulletDamage => bulletDamage;
     
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject bombPrefab;
 
     public GameObject ExplosionPrefab => explosionPrefab;
 
@@ -93,13 +94,16 @@ public class PlayerController : MonoBehaviour
     
     
     // CURSES
+    public bool curse2 { get; private set; } = false;
     public bool curse3 { get; private set; } = false;
     private bool curse4 = false;
     private bool curse5 = false;
     private bool curse6 = false;
+    public bool curse7 { get; private set; } = false;
     private bool curse8 = false;
     private bool curse9 = false;
     public bool curse12 { get; private set; } = false;
+    
     public bool curse16 { get; private set; } = false;
     
     public LevelManager LevelManager;
@@ -248,9 +252,8 @@ public class PlayerController : MonoBehaviour
         
         if (curse8)
         {
-            GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
-            explo.GetComponent<ExplosionManager>().SetDamage(bulletDamage * 0.5f);
-            explo.GetComponent<ExplosionManager>().SetTargetsPlayer();
+            GameObject bomb = Instantiate(bombPrefab, transform.position, transform.rotation);
+            bomb.GetComponent<Bomb>()._damage = bulletDamage;
         }
 
         
@@ -392,6 +395,9 @@ public class PlayerController : MonoBehaviour
     {
         switch (curse.curseIdentifier)
         {
+            case 2:
+                curse2 = true;
+                break;
             case 3:
                 curse3 = true;
                 break;
@@ -403,6 +409,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case 6:
                 curse6 = true;
+                break;
+            case 7:
+                curse7 = true;
                 break;
             case 8:
                 curse8 = true;

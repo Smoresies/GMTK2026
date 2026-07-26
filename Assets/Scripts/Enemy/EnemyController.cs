@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     protected MovementAi movementAi;
     [SerializeField]
     protected float moveSpeed = 5f;
+    [SerializeField]
+    protected int damage = 5;
 
     protected PlayerController player;
     public Action OnDeathEvent;
@@ -53,6 +55,11 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Curse2()
+    {
+        health *= 1.5f;
+        damage *= 2;
+    }
     
     protected virtual void FixedUpdate()
     {

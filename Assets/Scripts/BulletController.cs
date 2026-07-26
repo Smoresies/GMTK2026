@@ -16,11 +16,7 @@ public class BulletController : MonoBehaviour
       if (collision.gameObject.TryGetComponent(out EnemyController enemy))
       {
          PlayerController pc = GameObject.FindAnyObjectByType<PlayerController>();
-         
-         
-         // Test spot for Explosion
-         GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
-         explo.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
+
          
          // THIS IS LIKELY MASSIVELY OVER-FUCKING-POWERED
          if (pc.hasWeightedDie)

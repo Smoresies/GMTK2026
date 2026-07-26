@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class LittleHorrorMonsterEnemy : EnemyController
 {
-    [SerializeField]
-    private int damage = 0;
+
 
     [SerializeField] private GameObject explosionPrefab;
 
