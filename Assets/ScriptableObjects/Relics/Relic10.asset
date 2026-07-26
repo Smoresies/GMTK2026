@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8136beaa8d5f364abdfd6e7b11bf6bd, type: 3}
-  m_Name: Relic3
+  m_Name: Relic10
   m_EditorClassIdentifier: Assembly-CSharp::Relic
-  relicSprite: {fileID: 2781615946035068057, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
-  relicName: Carmine Bishop
-  relicDescription: Every 5 seconds shoot bullets on each of your inter-cardinal
-    directions
+  relicSprite: {fileID: 7515750695614087925, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
+  relicName: Temporal Paradoxes for Dummies
+  relicDescription: Double the length of Frozen Time

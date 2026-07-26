@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8136beaa8d5f364abdfd6e7b11bf6bd, type: 3}
   m_Name: Relic1
   m_EditorClassIdentifier: Assembly-CSharp::Relic
-  relicSprite: {fileID: -5776253253771959580, guid: 9e1c9f2189b78894faa3e41cc2680ed5, type: 3}
-  relicName: Relic1
-  relicDescription: Relic 1 Desc
+  relicSprite: {fileID: 7980646992620193335, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
+  relicName: Carmine Knight
+  relicDescription: Every 5 Seconds, shoot a cross shape in the direction you're
+    firing!

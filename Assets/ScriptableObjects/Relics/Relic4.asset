@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8136beaa8d5f364abdfd6e7b11bf6bd, type: 3}
   m_Name: Relic4
   m_EditorClassIdentifier: Assembly-CSharp::Relic
-  relicSprite: {fileID: 9021421324605509006, guid: 550366d572a2d9443bcfe5bd92cb3771, type: 3}
-  relicName: Relic4
-  relicDescription: Relic 4 ddesc
+  relicSprite: {fileID: 1541294906539617575, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
+  relicName: Dubious Energy Tonic
+  relicDescription: Every 5 seconds, EXPLODE
