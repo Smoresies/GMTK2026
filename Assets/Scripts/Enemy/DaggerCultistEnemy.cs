@@ -23,6 +23,8 @@ public class DaggerCultistEnemy : EnemyController
     private List<WeightedObject<string>> weightedDecisions;
     [SerializeField]
     private float variableDecisionTime = .25f;
+    [SerializeField]
+    private Animator anim;
     protected override void Start()
     {
         base.Start();
@@ -59,9 +61,11 @@ public class DaggerCultistEnemy : EnemyController
             switch(Utils.GetRandomWeightedObject(weightedDecisions).item)
             {
                 case "noMove":
+                    anim.SetBool("Moving", false);
                     initNewMovementAi(noMovementAi);
                     break;
                 case "move":
+                    anim.SetBool("Moving", true);
                     moveToPositionAi.UpdateValues(player.transform.position.x - distanceToPlayer, player.transform.position.x + distanceToPlayer, player.transform.position.y - distanceToPlayer, player.transform.position.y + distanceToPlayer);
                     initNewMovementAi(moveToPositionAi);
                     break;
