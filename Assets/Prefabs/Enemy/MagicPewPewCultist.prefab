@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6411765908957379756}
   - component: {fileID: 2687595798676883193}
   - component: {fileID: 3338754794487436017}
+  - component: {fileID: 6340608781347193164}
   - component: {fileID: 726289248076268428}
   - component: {fileID: 1769123849802871038}
   m_Layer: 8
@@ -168,6 +169,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6340608781347193164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932359359872522324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d89ae98cdae7c40b0c2624af87d735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NoMovementAi
 --- !u!114 &726289248076268428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,9 +212,19 @@ MonoBehaviour:
   health: 10
   movementAi: {fileID: 726289248076268428}
   moveSpeed: 300
+  moveToPositionAi: {fileID: 726289248076268428}
+  noMovementAi: {fileID: 6340608781347193164}
   damage: 10
-  timeBetweenShots: 3
+  timeBetweenDecisions: 2
+  resetTime: 3
   fireRange: 6
   bulletPrefab: {fileID: 6754795878463848348, guid: 84164ec96b634b44ea5ff1935190a496, type: 3}
   bulletSpeed: 10
   bulletDamage: 1
+  weightedDecisions:
+  - item: noMove
+    weight: 1
+  - item: move
+    weight: 3
+  - item: shoot
+    weight: 2
