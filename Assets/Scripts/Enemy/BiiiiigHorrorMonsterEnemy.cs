@@ -9,7 +9,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
     protected NoMovementAi noMovementAi;
     [SerializeField]
     private float timeBetweenDecisions = 1f;
-    private float timeBeforeNextDecision = 0f;
+    private float timeBeforeNextDecision = 1f;
     [SerializeField]
     private float timeBetweenAttacks = 1f;
     private float timeBeforeNextAttack = 0f;
@@ -31,7 +31,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
         base.Start();
         moveToPositionAi.initialize(player.transform, transform);
         noMovementAi.initialize(player.transform, transform);
-        initNewMovementAi(moveToPositionAi);
+        initNewMovementAi(noMovementAi);
     }
 
     private void initNewMovementAi(MovementAi newMovementAi)
