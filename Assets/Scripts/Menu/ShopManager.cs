@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    public event Action OnShopClosed;
+
     [SerializeField]
     PlayerController playerController;
     [SerializeField]
@@ -212,5 +215,6 @@ public class ShopManager : MonoBehaviour
         else
             legendaryRelicCursePairs.Add(legendaryRelicCursePair);
         DisableShop();
+        OnShopClosed?.Invoke();
     }
 }
