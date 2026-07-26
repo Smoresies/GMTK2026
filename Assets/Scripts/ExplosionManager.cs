@@ -30,11 +30,11 @@ public class ExplosionManager : MonoBehaviour
             if ((!_hitsPlayer || pc.hasBottledRage) && col.gameObject.TryGetComponent(out EnemyController enemy))
             {
                 enemy.TakeDamage(_damage);
-                Debug.Log(col.gameObject.name);
+                // Debug.Log(col.gameObject.name);
             } else if (_hitsPlayer && col.gameObject.TryGetComponent(out PlayerController player))
             {
                 player.TakeDamage(_damage);
-                Debug.Log(col.gameObject.name);
+                // Debug.Log(col.gameObject.name);
             }
         }
     }

@@ -34,8 +34,9 @@ public class BulletController : MonoBehaviour
          } else if(pc.hasWeightedDie) 
             _damage /= 2;
          
-         for (int i = 0; i < attacks; ++i)
+         for (int i = 0; i < attacks && enemy.GetHealth() > 0; ++i)
          {
+            
             enemy.TakeDamage(_damage);
             
             // Jagged Charm

@@ -9,7 +9,7 @@ public abstract class MovementAi : MonoBehaviour
     {
         player = playerTransform;
         self = selfTransform;
-        Debug.Log("MovementAi initialized with player: " + player.name + " and enemy: " + self.name);
+        // Debug.Log("MovementAi initialized with player: " + player.name + " and enemy: " + self.name);
     }
 
     public virtual Vector3 GetMoveDirection()

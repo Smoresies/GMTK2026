@@ -21,7 +21,7 @@ public class MoveToPositionAI : MovementAi
             throw new Exception("Invalid min/max values for MoveToPositionAI. Ensure that minX < maxX and minY < maxY.");
         }
         moveLocation = new Vector3(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY));
-        Debug.Log("MoveToPositionAI initialized with moveLocation: " + moveLocation);
+        // Debug.Log("MoveToPositionAI initialized with moveLocation: " + moveLocation);
     }
     public override Vector3 GetMoveDirection()
     {

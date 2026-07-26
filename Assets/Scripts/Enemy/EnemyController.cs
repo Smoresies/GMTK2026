@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
         movementAi.initialize(player.transform, transform);
         ParticleSystem ps = Instantiate(spawnSmoke, transform.position, transform.rotation).GetComponent<ParticleSystem>();
         // spawnSmoke.GetComponent<ParticleSystem>().Play();
-        Debug.Log("Should be spawning particles");
+        // Debug.Log("Should be spawning particles");
     }
     public virtual void TakeDamage(float damage)
     {
@@ -68,6 +68,11 @@ public class EnemyController : MonoBehaviour
     {
         health *= 1.5f;
         damage *= 2;
+    }
+
+    public float GetHealth()
+    {
+        return health;
     }
     
     protected virtual void FixedUpdate()

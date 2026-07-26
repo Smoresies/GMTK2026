@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
         Level nextRoom = roomQueue.Dequeue();
         List<GameObject> enemies = new List<GameObject>();
         PlayerController player = FindAnyObjectByType<PlayerController>();
-        int enemyNum = (int)(UnityEngine.Random.Range(minNumEnemies, maxNumEnemies + 1) * (player.curse7 ? 1.5f : 1.0f));
+        int enemyNum = (int)(UnityEngine.Random.Range(minNumEnemies + stage, maxNumEnemies + 1 + stage) * (player.curse7 ? 1.5f : 1.0f));
         for (int i = 0; i < enemyNum; i++)
         {
             enemies.Add(Utils.GetRandomWeightedObject(enemyPrefabList).item);

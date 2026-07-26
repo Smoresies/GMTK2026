@@ -38,7 +38,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
     {
         movementAi = newMovementAi;
         movementAi.initialize(player.transform, transform);
-        Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
+        // Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
     }
 
     protected override void FixedUpdate()
@@ -51,7 +51,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
             timeBeforeNextAttack = timeBetweenAttacks;
             player.TakeDamage(attackDamage);
             anim.SetBool("Attacking", true);
-            Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
+            // Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
         }
         if (timeBeforeNextDecision < 0f)
         {

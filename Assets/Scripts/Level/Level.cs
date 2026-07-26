@@ -29,13 +29,13 @@ public class Level : ScriptableObject
         numEnemiesRemaining = 0;
         level = Instantiate(prefab);
 
-        CompleteLevelEvent += CompleteEventAction;
+        CompleteLevelEvent = CompleteEventAction;
         host.StartCoroutine(WaitAndSpawnEnemies(enemyPrefabsToSpawn));
     }
 
     IEnumerator WaitAndSpawnEnemies(List<GameObject> enemyPrefabsToSpawn)
     {
-        Debug.Log("Game started...");
+        // Debug.Log("Game started...");
 
         yield return new WaitForSeconds(waitForSpawnTime);
 
@@ -55,6 +55,7 @@ public class Level : ScriptableObject
 
     public void EnemyDied()
     {
+        Debug.Log("Enemy Killed");
         numEnemiesRemaining--;
         if (IsLevelComplete())
         {

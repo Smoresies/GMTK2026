@@ -4814,8 +4814,8 @@ MonoBehaviour:
     weight: 1
   - item: {fileID: 932359359872522324, guid: 754893ab3d649784bbb3590312bfc2fa, type: 3}
     weight: 4
-  minNumEnemies: 2
-  maxNumEnemies: 5
+  minNumEnemies: 1
+  maxNumEnemies: 3
 --- !u!4 &1843616091
 Transform:
   m_ObjectHideFlags: 0

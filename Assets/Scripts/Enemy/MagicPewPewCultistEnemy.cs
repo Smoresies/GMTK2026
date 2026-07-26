@@ -34,7 +34,7 @@ public class MagicPewPewCultistEnemy : EnemyController
     {
         movementAi = newMovementAi;
         movementAi.initialize(player.transform, transform);
-        Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
+        // Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
     }
     protected override void FixedUpdate()
     {

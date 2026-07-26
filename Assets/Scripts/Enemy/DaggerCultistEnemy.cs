@@ -38,7 +38,7 @@ public class DaggerCultistEnemy : EnemyController
     {
         movementAi = newMovementAi;
         movementAi.initialize(player.transform, transform);
-        Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
+        // Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
     }
 
     protected override void FixedUpdate()
@@ -50,7 +50,7 @@ public class DaggerCultistEnemy : EnemyController
         {
             timeBeforeNextAttack = timeBetweenAttacks;
             player.TakeDamage(damage);
-            Debug.Log(this.name + " attacked player for " + damage + " damage");
+            // Debug.Log(this.name + " attacked player for " + damage + " damage");
             initNewMovementAi(moveAwayFromPlayerAi);
             timeBeforeNextDecision = timeBetweenDecisions + Random.Range(-variableDecisionTime, variableDecisionTime);
         }
