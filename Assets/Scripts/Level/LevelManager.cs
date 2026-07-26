@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private ShopManager shopManager;
     [SerializeField]
+    private BGM audioManager;
+    [SerializeField]
     private List<WeightedObject<Level>> listOfLevelsWithWeights;
     [SerializeField]
     private Level firstRoomPrefab;
@@ -60,6 +62,7 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 0;
         shopManager.EnableShop();
+        audioManager.ShopTime();
     }
 
     public void OnDebug(InputValue inputValue)

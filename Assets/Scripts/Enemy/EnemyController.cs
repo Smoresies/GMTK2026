@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     protected float moveSpeed = 5f;
     [SerializeField]
     protected int damage = 5;
+    [SerializeField]
+    private AudioSource hurtSFX;
 
     protected PlayerController player;
     public Action OnDeathEvent;
@@ -26,6 +28,8 @@ public class EnemyController : MonoBehaviour
     }
     public virtual void TakeDamage(float damage)
     {
+        hurtSFX.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        hurtSFX.Play();
         health -= damage;
         if (health <= 0)
         {
