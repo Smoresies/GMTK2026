@@ -4814,8 +4814,8 @@ MonoBehaviour:
     weight: 1
   - item: {fileID: 932359359872522324, guid: 754893ab3d649784bbb3590312bfc2fa, type: 3}
     weight: 4
-  minNumEnemies: 1
-  maxNumEnemies: 3
+  minNumEnemies: 0
+  maxNumEnemies: 2
 --- !u!4 &1843616091
 Transform:
   m_ObjectHideFlags: 0
@@ -5196,7 +5196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7083858664105550614, guid: 97cd247fb0a82064fb19212b20b64d12, type: 3}
       propertyPath: dashSpeed
-      value: 1000
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083858664105550614, guid: 97cd247fb0a82064fb19212b20b64d12, type: 3}
+      propertyPath: moveSpeed
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7083858664105550614, guid: 97cd247fb0a82064fb19212b20b64d12, type: 3}
       propertyPath: healthTimer
