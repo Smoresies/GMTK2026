@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068197089793671660}
   - component: {fileID: 3454217855709824286}
+  - component: {fileID: 3914051078149057602}
   - component: {fileID: 8647663329264004823}
   - component: {fileID: -927870289759768313}
   - component: {fileID: 2878248063410293613}
@@ -54,10 +55,31 @@ MonoBehaviour:
   moveSpeed: 300
   moveToPositionAi: {fileID: 8647663329264004823}
   noMovementAi: {fileID: -927870289759768313}
+  moveAwayFromPlayerAi: {fileID: 3914051078149057602}
+  timeBetweenDecisions: 1
   timeBetweenAttacks: 2
   attackDamage: 1
   distanceToPlayer: 1.2
   attackDistance: 1.5
+  weightedDecisions:
+  - item: move
+    weight: 4
+  - item: noMove
+    weight: 1
+  variableDecisionTime: 0.25
+--- !u!114 &3914051078149057602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287844853113591602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6f9761d9b8da4f8cc7ffeb8f47325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveAwayFromPlayerAi
+  stopDistance: 5
 --- !u!114 &8647663329264004823
 MonoBehaviour:
   m_ObjectHideFlags: 0
