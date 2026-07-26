@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    public event Action OnDeath;
     [SerializeField] private float healthTimer = 600f;
 
     [SerializeField] private float moveSpeed = 5f;
@@ -204,6 +206,11 @@ public class PlayerController : MonoBehaviour
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
+                Debug.Log(healthTimer);
+        if (healthTimer <= 0)
+        {
+            Die();
+        }
     }
 
     private void FixedUpdate()
@@ -234,11 +241,6 @@ public class PlayerController : MonoBehaviour
                 bullet.transform.localScale *= 3f;
         }
     }
-    /*
-    public virtual void TakeDamage(float damage)
-    {
-        Debug.Log("Player took " + damage + " damage");
-    }*/
 
     public Rigidbody2D GetRigidbody()
     {
@@ -379,13 +381,13 @@ public class PlayerController : MonoBehaviour
             chronoShieldCD = relicCDs;
         }
             
-        Debug.Log(healthTimer);
-        if (healthTimer <= 0)
-        {
-            // Eventually add some like. Art/effect here
-            Destroy(gameObject);
-        }
 
+
+    }
+
+    public void Die()
+    {
+        OnDeath?.Invoke();
     }
 
     public void Capitalism(float damage)

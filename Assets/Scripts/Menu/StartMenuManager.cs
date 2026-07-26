@@ -9,11 +9,15 @@ public class StartMenuManager : MonoBehaviour
     private Button quitButton;
     [SerializeField]
     private GameObject startMenuUI;
+    [SerializeField]
+    private LevelManager levelManager;
 
     private void Awake()
     {
+        Time.timeScale = 0;
         startButton.onClick.AddListener(OnStartButtonPressed);
         quitButton.onClick.AddListener(OnQuitButtonPressed);
+        startMenuUI.SetActive(true);
     }
     public void OnQuitButtonPressed()
     {
@@ -23,5 +27,6 @@ public class StartMenuManager : MonoBehaviour
     public void OnStartButtonPressed()
     {
         startMenuUI.SetActive(false);
+        levelManager.StartGame();
     }
 }

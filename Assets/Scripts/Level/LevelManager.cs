@@ -32,6 +32,11 @@ public class LevelManager : MonoBehaviour
             roomQueue.Enqueue(Utils.GetRandomWeightedObject(listOfLevelsWithWeights).item);
         }
         roomQueue.Enqueue(lastRoomPrefab);
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("Started Game");
         SetNextRoom();
     }
 
