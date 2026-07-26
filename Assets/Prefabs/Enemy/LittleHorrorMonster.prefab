@@ -56,9 +56,11 @@ MonoBehaviour:
   moveSpeed: 500
   damage: 10
   hurtSFX: {fileID: 2984572973344008183}
+  spawnSmoke: {fileID: 7912660409315329846, guid: beb91fb2f8cbd2948b3645b0c44089cd, type: 3}
   moveToPlayerAi: {fileID: 6140982821819243691}
   noMovementAi: {fileID: 4949394067301762171}
   explosionPrefab: {fileID: 7912660409315329846, guid: 0d3e6e8d7ad5c9347900e5343b2ed229, type: 3}
+  timeBetweenDecisions: 2
   attackDistance: 1.2
 --- !u!114 &4949394067301762171
 MonoBehaviour:

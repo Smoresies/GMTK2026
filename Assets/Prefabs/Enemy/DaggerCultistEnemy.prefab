@@ -57,6 +57,7 @@ MonoBehaviour:
   moveSpeed: 300
   damage: 5
   hurtSFX: {fileID: -388247873813645408}
+  spawnSmoke: {fileID: 7912660409315329846, guid: beb91fb2f8cbd2948b3645b0c44089cd, type: 3}
   moveToPositionAi: {fileID: 8647663329264004823}
   noMovementAi: {fileID: -927870289759768313}
   moveAwayFromPlayerAi: {fileID: 3914051078149057602}
