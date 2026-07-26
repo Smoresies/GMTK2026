@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::Level
   prefab: {fileID: 7180228036008418284, guid: 951ebefb9cbab034e86c8dec508002c4, type: 3}
-  minXSpawnLocation: 0
-  maxXSpawnLocation: 5
-  minYSpawnLocation: 0
-  maxYSpawnLocation: 8
+  minXSpawnLocation: -12
+  maxXSpawnLocation: 12
+  minYSpawnLocation: -2
+  maxYSpawnLocation: 18
+  waitForSpawnTime: 2
