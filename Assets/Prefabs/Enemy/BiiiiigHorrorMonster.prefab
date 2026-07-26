@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8372283970919855523}
   - component: {fileID: 5555379464347099625}
-  - component: {fileID: 1923345482494579870}
   - component: {fileID: 2305935971797847692}
   - component: {fileID: 1993126628218904596}
   - component: {fileID: 1826957075785920590}
   - component: {fileID: 7607530694011726153}
+  - component: {fileID: -5318488829703541689}
+  - component: {fileID: -5682707385064074144}
   m_Layer: 8
   m_Name: BiiiiigHorrorMonster
   m_TagString: Untagged
@@ -50,25 +51,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BiiiiigHorrorMonsterEnemy
   health: 10
-  movementAi: {fileID: 1923345482494579870}
+  movementAi: {fileID: -5318488829703541689}
   moveSpeed: 300
   damage: 5
   hurtSFX: {fileID: 7607530694011726153}
-  timeBetweenAttacks: 3
+  moveToPositionAi: {fileID: -5318488829703541689}
+  noMovementAi: {fileID: -5682707385064074144}
+  timeBetweenDecisions: 1
+  timeBetweenAttacks: 2
   attackDamage: 1
---- !u!114 &1923345482494579870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8628614583826300223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2e1d3ee59f24042881928df2cab30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveToPlayerAi
-  stopDistance: 1.2
+  distanceToPlayer: 1.2
+  attackDistance: 1.5
+  weightedDecisions:
+  - item: move
+    weight: 4
+  - item: noMove
+    weight: 1
+  variableDecisionTime: 0.25
 --- !u!212 &2305935971797847692
 SpriteRenderer:
   serializedVersion: 2
@@ -203,6 +202,8 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!82 &7607530694011726153
 AudioSource:
+--- !u!114 &-5318488829703541689
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -298,3 +299,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfec6282a2bcd741ade9a54489b4286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveToPositionAI
+  minX: 0
+  maxX: 10
+  minY: 0
+  maxY: 10
+--- !u!114 &-5682707385064074144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8628614583826300223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d89ae98cdae7c40b0c2624af87d735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NoMovementAi

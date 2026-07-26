@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
             
     }
 
-    private void Die()
+    protected void Die()
     {
         OnDeathEvent?.Invoke();
         Destroy(gameObject);
@@ -68,6 +68,5 @@ public class EnemyController : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         rigidBody.linearVelocity = movementAi.GetMoveDirection() * moveSpeed * Time.fixedDeltaTime;
-        // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
     }
 }

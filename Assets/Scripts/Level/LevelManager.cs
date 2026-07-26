@@ -6,14 +6,6 @@ using UnityEngine.InputSystem;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject biiiiigHorrorMonsterEnemyPrefab;
-    [SerializeField]
-    private GameObject daggerCultistEnemyPrefab;
-    [SerializeField]
-    private GameObject littleHorrorMonsterEnemyPrefab;
-    [SerializeField]
-    private GameObject magicPewPewCultistEnemyPrefab;
-    [SerializeField]
     private ShopManager shopManager;
     [SerializeField]
     private BGM audioManager;
@@ -26,7 +18,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField][Min(2)]
     private int totalNumberOfRooms = 5;
     private Queue<Level> roomQueue = new Queue<Level>();
-
+    [SerializeField]
+    private List<WeightedObject<GameObject>> enemyPrefabList;
+    [SerializeField]
+    private int minNumEnemies = 2;
+    [SerializeField]
+    private int maxNumEnemies = 5;
+    private int stage = 0;
     void Awake()
     {
         shopManager.OnShopClosed += SetNextRoom;
@@ -36,21 +34,28 @@ public class LevelManager : MonoBehaviour
             roomQueue.Enqueue(Utils.GetRandomWeightedObject(listOfLevelsWithWeights).item);
         }
         roomQueue.Enqueue(lastRoomPrefab);
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("Started Game");
         SetNextRoom();
     }
 
     private void SetNextRoom()
     {
         Time.timeScale = 1;
+        stage++;
+        Debug.Log("You on stage: " + stage + " lil cutie");
         Level nextRoom = roomQueue.Dequeue();
         List<GameObject> enemies = new List<GameObject>();
         PlayerController player = FindAnyObjectByType<PlayerController>();
-        int enemyNum = (int)(UnityEngine.Random.Range(2, 5) * (player.curse7 ? 1.5f : 1.0f));
+        int enemyNum = (int)(UnityEngine.Random.Range(minNumEnemies, maxNumEnemies + 1) * (player.curse7 ? 1.5f : 1.0f));
         for(int i =0; i < enemyNum; i++)
         {
-            enemies.Add(magicPewPewCultistEnemyPrefab);
+            enemies.Add(Utils.GetRandomWeightedObject(enemyPrefabList).item);
         }
-        nextRoom.Init(enemies, CompleteLevel);
+        nextRoom.Init(this, enemies, CompleteLevel);
     }
 
     private void CompleteLevel()

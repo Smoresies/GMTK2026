@@ -5,11 +5,17 @@ public class LittleHorrorMonsterEnemy : EnemyController
 {
 
 
-    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField]
+    private GameObject explosionPrefab;
 
-    private void OnTriggerEnter(Collider other)
+    [SerializeField]
+    private float attackDistance;
+
+    protected override void FixedUpdate()
     {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
+        base.FixedUpdate();
+
+        if ((player.transform.position - transform.position).magnitude < attackDistance)
         {    
             GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);
             ExplosionManager exSetters = explo.GetComponent<ExplosionManager>();
@@ -17,7 +23,7 @@ public class LittleHorrorMonsterEnemy : EnemyController
             exSetters.SetTargetsPlayer();
             
 
-            Destroy(gameObject);
+            Die();
         }
     }
 }

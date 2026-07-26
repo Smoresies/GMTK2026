@@ -12,14 +12,18 @@ public class StartMenuManager : MonoBehaviour
     private Button quitButton;
     [SerializeField]
     private GameObject startMenuUI;
+    [SerializeField]
+    private LevelManager levelManager;
 
     [SerializeField]
     private AudioSource buttonClick;
 
     private void Awake()
     {
+        Time.timeScale = 0;
         startButton.onClick.AddListener(OnStartButtonPressed);
         quitButton.onClick.AddListener(OnQuitButtonPressed);
+        startMenuUI.SetActive(true);
     }
     public void OnQuitButtonPressed()
     {
@@ -42,6 +46,7 @@ public class StartMenuManager : MonoBehaviour
         Debug.Log("Sound finished! Continuing code...");
 
         startMenuUI.SetActive(false);
+        levelManager.StartGame();
     }
 
     public void OnStartButtonPressed()

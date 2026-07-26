@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,13 +19,26 @@ public class Level : ScriptableObject
     private int minYSpawnLocation;
     [SerializeField]
     private int maxYSpawnLocation;
+    [SerializeField]
+    private float waitForSpawnTime = 2f;
 
     private GameObject level;
 
-    public void Init(List<GameObject> enemyPrefabsToSpawn, Action CompleteEventAction)
+    public void Init(MonoBehaviour host, List<GameObject> enemyPrefabsToSpawn, Action CompleteEventAction)
     {
         numEnemiesRemaining = 0;
         level = Instantiate(prefab);
+
+        CompleteLevelEvent += CompleteEventAction;
+        host.StartCoroutine(WaitAndSpawnEnemies(enemyPrefabsToSpawn));
+    }
+
+    IEnumerator WaitAndSpawnEnemies(List<GameObject> enemyPrefabsToSpawn)
+    {
+        Debug.Log("Game started...");
+
+        yield return new WaitForSeconds(waitForSpawnTime);
+
         foreach (GameObject enemyPrefab in enemyPrefabsToSpawn)
         {
             GameObject enemy = Instantiate(enemyPrefab, level.transform);
@@ -36,14 +50,13 @@ public class Level : ScriptableObject
             enemyController.OnDeathEvent += EnemyDied;
             numEnemiesRemaining++;
         }
-        CompleteLevelEvent += CompleteEventAction;
     }
 
 
     public void EnemyDied()
     {
         numEnemiesRemaining--;
-        if(IsLevelComplete())
+        if (IsLevelComplete())
         {
             CompleteLevel();
         }
