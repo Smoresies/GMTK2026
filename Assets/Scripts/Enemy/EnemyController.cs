@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,6 +13,7 @@ public class EnemyController : MonoBehaviour
     protected float moveSpeed = 5f;
 
     protected PlayerController player;
+    public Action OnDeathEvent;
 
     protected virtual void Start()
     {
@@ -40,10 +42,15 @@ public class EnemyController : MonoBehaviour
                 explo.GetComponent<ExplosionManager>().SetDamage(player.BulletDamage * 0.5f);
             }
                 
-            
-            Destroy(gameObject);
+            Die();
         }
             
+    }
+
+    private void Die()
+    {
+        OnDeathEvent?.Invoke();
+        Destroy(gameObject);
     }
 
     

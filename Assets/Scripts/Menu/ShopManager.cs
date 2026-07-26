@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    public event Action OnShopClosed;
+
     [SerializeField]
     PlayerController playerController;
     [SerializeField]
@@ -66,6 +69,7 @@ public class ShopManager : MonoBehaviour
 
     public void EnableShop()
     {
+        Time.timeScale = 0;
         rerollSlot1Button.interactable = true;
         rerollSlot2Button.interactable = true;
         rerollSlot3Button.interactable = true;
@@ -94,6 +98,7 @@ public class ShopManager : MonoBehaviour
     public void DisableShop()
     {
         shopUI.SetActive(false);
+        Time.timeScale = 1;
     }
     public void ChooseSlot(int slotIndex)
     {
@@ -212,5 +217,6 @@ public class ShopManager : MonoBehaviour
         else
             legendaryRelicCursePairs.Add(legendaryRelicCursePair);
         DisableShop();
+        OnShopClosed?.Invoke();
     }
 }
