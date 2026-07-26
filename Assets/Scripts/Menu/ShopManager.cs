@@ -100,13 +100,21 @@ public class ShopManager : MonoBehaviour
         switch (slotIndex)
         {
             case 1:
-                choseSlot1 = !choseSlot1;
+                playerController.AddRelic(relic1.item);
+                playerController.AddCurse(curse1.item);
+                slot1Button.interactable = false;
+                choseSlot1 = true;
                 break;
             case 2:
-                choseSlot2 = !choseSlot2;
+                playerController.AddRelic(relic2.item);
+                playerController.AddCurse(curse2.item);
+                slot2Button.interactable = false;
+                choseSlot2 = true;
                 break;
             case 3:
-                choseSlot3 = !choseSlot3;
+                playerController.AddRelic(legendaryRelicCursePair.item);
+                slot3Button.interactable = false;
+                choseSlot3 = true;
                 break;
             default:
                 Debug.LogError("Invalid slot index: " + slotIndex);
@@ -123,8 +131,17 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Curse> newCurse = Utils.GetRandomWeightedObject(regularCurses);
             regularCurses.Remove(newCurse);
 
-            regularRelics.Add(relic1);
-            regularCurses.Add(curse1);
+            if (choseSlot1)
+            {
+                slot1Button.interactable = true;
+                choseSlot1 = false;
+            }
+            else
+            {
+                regularRelics.Add(relic1);
+                regularCurses.Add(curse1);
+            }
+            
 
             relic1 = newRelic;
             curse1 = newCurse;
@@ -139,8 +156,16 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Curse> newCurse = Utils.GetRandomWeightedObject(regularCurses);
             regularCurses.Remove(newCurse);
 
-            regularRelics.Add(relic2);
-            regularCurses.Add(curse2);
+            if (choseSlot2)
+            {
+                slot2Button.interactable = true;
+                choseSlot2 = false;
+            }
+            else
+            {
+                regularRelics.Add(relic2);
+                regularCurses.Add(curse2);
+            }
 
             relic2 = newRelic;
             curse2 = newCurse;
@@ -152,7 +177,13 @@ public class ShopManager : MonoBehaviour
             WeightedObject<Relic> newPair = Utils.GetRandomWeightedObject(legendaryRelicCursePairs);
             legendaryRelicCursePairs.Remove(newPair);
 
-            legendaryRelicCursePairs.Add(legendaryRelicCursePair);
+            if (choseSlot3)
+            {
+                slot3Button.interactable = true;
+                choseSlot3 = false;
+            }
+            else
+                legendaryRelicCursePairs.Add(legendaryRelicCursePair);
 
             legendaryRelicCursePair = newPair;
             relicImage3.sprite = newPair.item.relicSprite;
@@ -163,30 +194,23 @@ public class ShopManager : MonoBehaviour
     public void EndShop()
     {
         if (choseSlot1)
-        {
-            playerController.AddRelic(relic1.item);
-            playerController.AddCurse(curse1.item);
-        } else
+            slot1Button.interactable = true;
+        else
         {
             regularRelics.Add(relic1);
             regularCurses.Add(curse1);
         }
         if (choseSlot2)
-        {
-            playerController.AddRelic(relic2.item);
-            playerController.AddCurse(curse2.item);
-        } else
+            slot2Button.interactable = true;
+        else
         {
             regularRelics.Add(relic2);
             regularCurses.Add(curse2);
         }
         if (choseSlot3)
-        {
-            playerController.AddRelic(legendaryRelicCursePair.item);
-        } else
-        {
+            slot3Button.interactable = true;
+        else
             legendaryRelicCursePairs.Add(legendaryRelicCursePair);
-        }
         DisableShop();
     }
 }

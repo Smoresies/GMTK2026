@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8136beaa8d5f364abdfd6e7b11bf6bd, type: 3}
-  m_Name: LRelic1
+  m_Name: LRelic4
   m_EditorClassIdentifier: Assembly-CSharp::Relic
-  relicSprite: {fileID: -8201988352648256318, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
-  relicName: Flower of the Old One
-  relicDescription: No longer take damage from enemy attacks and reduce the rate
-    at which your health drains. BUT any damage you take instead permanently increases
-    the rate that your health drains.
+  relicSprite: {fileID: 7505055480767481180, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
+  relicName: Ripped Clover Charm
+  relicDescription: +20% increase to Crit Rate and Critical Hits hit Twice, BUT Enemies
+    gain a 25% chance to critically hit you.

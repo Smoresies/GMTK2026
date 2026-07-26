@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Relic
   relicSprite: {fileID: -7441832040114828642, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
   relicName: Lightning Charm
-  relicDescription: On Critical Hit, cause an explosion that damages all enemies
-    in range for Half Damage
+  relicDescription: +10% Crit Chance and On Critical Hit, cause an explosion that
+    damages all enemies in range for Half Damage
