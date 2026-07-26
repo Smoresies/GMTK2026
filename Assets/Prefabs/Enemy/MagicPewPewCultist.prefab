@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff0a854113053d4ea0f2d69c2b0c7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicPewPewCultistEnemy
-  health: 10
+  health: 5
   movementAi: {fileID: 6340608781347193164}
   moveSpeed: 300
   damage: 10

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663508a1142cadb458e7a02da530fe9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DaggerCultistEnemy
-  health: 10
+  health: 5
   movementAi: {fileID: -927870289759768313}
   moveSpeed: 300
   damage: 5

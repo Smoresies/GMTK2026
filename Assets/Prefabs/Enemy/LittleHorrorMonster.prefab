@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b1a0efc82bfd045ba2bef37892728f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LittleHorrorMonsterEnemy
-  health: 5
+  health: 3
   movementAi: {fileID: 4949394067301762171}
   moveSpeed: 500
   damage: 10
