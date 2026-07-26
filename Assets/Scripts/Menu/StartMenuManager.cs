@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
@@ -10,6 +13,9 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject startMenuUI;
 
+    [SerializeField]
+    private AudioSource buttonClick;
+
     private void Awake()
     {
         startButton.onClick.AddListener(OnStartButtonPressed);
@@ -20,8 +26,26 @@ public class StartMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    private IEnumerator PlaySoundAndContinueRoutine()
+    { 
+        buttonClick.pitch *= Random.Range(0.9f, 1.1f);
+        buttonClick.Play();
+        // buttonClick.pitch = 0.85f;
+
+        // Option 1: Wait until the audio source stops playing (safe if pitch changes)
+        yield return new WaitWhile(() => buttonClick.isPlaying);
+
+        // Option 2: Alternatively, wait for the exact length of the clip in seconds
+        // yield return new WaitForSeconds(soundEffect.length);
+
+        // Continue your code here after the sound finishes
+        Debug.Log("Sound finished! Continuing code...");
+
+        startMenuUI.SetActive(false);
+    }
+
     public void OnStartButtonPressed()
     {
-        startMenuUI.SetActive(false);
+        StartCoroutine(PlaySoundAndContinueRoutine());
     }
 }

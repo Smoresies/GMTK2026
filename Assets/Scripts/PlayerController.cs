@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -111,6 +110,17 @@ public class PlayerController : MonoBehaviour
     
     public LevelManager LevelManager;
 
+    // Audio Clips
+    [SerializeField]
+    private AudioSource dashSFX;
+    [SerializeField]
+    private AudioSource hurtSFX;
+    [SerializeField]
+    private AudioSource shootingSFX;
+    [SerializeField]
+    private AudioSource walkingSFX; //Iffy on, not implemented
+
+
     void Start()
     {
         // Cache the Rigidbody2D component attached to the player
@@ -150,6 +160,7 @@ public class PlayerController : MonoBehaviour
         isFiring = shootInput.magnitude > 0f;
         if (isFiring)
             shootDir = shootInput.normalized;
+            
         // Debug.Log("Shoot Input: " + shootInput);
         // Implement shooting logic here
     }
@@ -162,8 +173,10 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashingRelics();
             dashTimeRemaining = dashDuration;
-            
-            if(curse4)
+            dashSFX.pitch = Random.Range(0.9f, 1.1f);
+            dashSFX.Play();
+
+            if (curse4)
                 slownessTimer = 1.0f;
         }
     }
@@ -218,6 +231,9 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
     {
+        shootingSFX.pitch = Random.Range(0.9f, 1.1f);
+        shootingSFX.Play();
+
         // Fire towards shootDir
         GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
 
@@ -369,7 +385,11 @@ public class PlayerController : MonoBehaviour
         if (hasFotOO)
             timeRate += 0.1f;
         else
+        {
             healthTimer -= damage;
+            hurtSFX.pitch = Random.Range(0.9f, 1.1f);
+            hurtSFX.Play();
+        }
         
         if (chronomachersShield && chronoShieldCD <= 0.0f)
         {
