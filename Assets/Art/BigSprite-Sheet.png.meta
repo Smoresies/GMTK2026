@@ -1,43 +1,28 @@
 fileFormatVersion: 2
-guid: a963c662ab6c48042a2db3d0c29e1fa6
+guid: 3c9c2e1a70910c545ab0231dc2e97c66
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2146325261911611826
-    second: CharacterSheet_0
+      213: 4630395734773693553
+    second: BigSprite-Sheet_0
   - first:
-      213: 4967684757281315799
-    second: CharacterSheet_1
+      213: -3621701206265376962
+    second: BigSprite-Sheet_1
   - first:
-      213: 4457059312207414977
-    second: CharacterSheet_2
+      213: -8963875801030437658
+    second: BigSprite-Sheet_2
   - first:
-      213: 7287619372497824471
-    second: CharacterSheet_3
+      213: 8444479853337422858
+    second: BigSprite-Sheet_3
   - first:
-      213: 4492797595560981109
-    second: CharacterSheet_4
+      213: 5789925425557487482
+    second: BigSprite-Sheet_4
   - first:
-      213: -7205907187406109100
-    second: CharacterSheet_5
+      213: 7555684570956344918
+    second: BigSprite-Sheet_5
   - first:
-      213: -279133644238819022
-    second: CharacterSheet_6
-  - first:
-      213: 1568812427291028391
-    second: CharacterSheet_7
-  - first:
-      213: 8578870837536603425
-    second: CharacterSheet_8
-  - first:
-      213: -8492410670495441705
-    second: CharacterSheet_9
-  - first:
-      213: 4048138136090361788
-    second: CharacterSheet_10
-  - first:
-      213: -2313408394707340494
-    second: CharacterSheet_11
+      213: -3418071985912405371
+    second: BigSprite-Sheet_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -133,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterSheet_0
+      name: BigSprite-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -148,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b950b8347749cd10800000000000000
-      internalID: 2146325261911611826
+      spriteID: 17c7bac4368724040800000000000000
+      internalID: 4630395734773693553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_1
+      name: BigSprite-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -170,14 +155,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7db10e187f2c0f440800000000000000
-      internalID: 4967684757281315799
+      spriteID: e3fc2f501f12dbdc0800000000000000
+      internalID: -3621701206265376962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_2
+      name: BigSprite-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c648f674d7aadd30800000000000000
-      internalID: 4457059312207414977
+      spriteID: 6e45cdc937ae99380800000000000000
+      internalID: -8963875801030437658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_3
+      name: BigSprite-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -214,14 +199,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7daecf33533d22560800000000000000
-      internalID: 7287619372497824471
+      spriteID: a0cae139fa1d03570800000000000000
+      internalID: 8444479853337422858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_4
+      name: BigSprite-Sheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -236,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 572342bfb9f995e30800000000000000
-      internalID: 4492797595560981109
+      spriteID: a7f3b5a8f72f95050800000000000000
+      internalID: 5789925425557487482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_5
+      name: BigSprite-Sheet_5
       rect:
         serializedVersion: 2
         x: 32
@@ -258,14 +243,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 456893277997ffb90800000000000000
-      internalID: -7205907187406109100
+      spriteID: 65ea0c6e51f2bd860800000000000000
+      internalID: 7555684570956344918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_6
+      name: BigSprite-Sheet_6
       rect:
         serializedVersion: 2
         x: 64
@@ -280,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 231f842fd61502cf0800000000000000
-      internalID: -279133644238819022
+      spriteID: 5822af673a19090d0800000000000000
+      internalID: -3418071985912405371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_7
+      name: BigSprite-Sheet_7
       rect:
         serializedVersion: 2
         x: 96
@@ -300,16 +285,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7ab66e7379a85c510800000000000000
-      internalID: 1568812427291028391
+      spriteID: af56f2e2f60721f4a98e219b5bdf0046
+      internalID: -285606414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_8
+      name: BigSprite-Sheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -322,16 +307,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 12db35de2954e0770800000000000000
-      internalID: 8578870837536603425
+      spriteID: 52884274aa274c44a9084343eaa98859
+      internalID: 255023743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_9
+      name: BigSprite-Sheet_9
       rect:
         serializedVersion: 2
         x: 32
@@ -344,16 +329,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7dcd16a6d75e42a80800000000000000
-      internalID: -8492410670495441705
+      spriteID: 3220572a665d86d43a93938be83fdfd8
+      internalID: -958220616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_10
+      name: BigSprite-Sheet_10
       rect:
         serializedVersion: 2
         x: 64
@@ -366,16 +351,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cbfb063df20ed2830800000000000000
-      internalID: 4048138136090361788
+      spriteID: bb044a1397287a54384091756da837c4
+      internalID: 1776004031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterSheet_11
+      name: BigSprite-Sheet_11
       rect:
         serializedVersion: 2
         x: 96
@@ -388,10 +373,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 233ff0d625f15efd0800000000000000
-      internalID: -2313408394707340494
+      spriteID: 97b65ac32a06e174d90b86b7b2036ab5
+      internalID: -368899931
       vertices: []
       indices: 
       edges: []
@@ -400,7 +385,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 47c6bd15f21a88741b768e57fca1875b
+    spriteID: 2271f016baf9d214682885162864efa0
     internalID: 0
     vertices: []
     indices: 
@@ -412,18 +397,18 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      CharacterSheet_0: 2146325261911611826
-      CharacterSheet_1: 4967684757281315799
-      CharacterSheet_10: 4048138136090361788
-      CharacterSheet_11: -2313408394707340494
-      CharacterSheet_2: 4457059312207414977
-      CharacterSheet_3: 7287619372497824471
-      CharacterSheet_4: 4492797595560981109
-      CharacterSheet_5: -7205907187406109100
-      CharacterSheet_6: -279133644238819022
-      CharacterSheet_7: 1568812427291028391
-      CharacterSheet_8: 8578870837536603425
-      CharacterSheet_9: -8492410670495441705
+      BigSprite-Sheet_0: 4630395734773693553
+      BigSprite-Sheet_1: -3621701206265376962
+      BigSprite-Sheet_10: 1776004031
+      BigSprite-Sheet_11: -368899931
+      BigSprite-Sheet_2: -8963875801030437658
+      BigSprite-Sheet_3: 8444479853337422858
+      BigSprite-Sheet_4: 5789925425557487482
+      BigSprite-Sheet_5: 7555684570956344918
+      BigSprite-Sheet_6: -3418071985912405371
+      BigSprite-Sheet_7: -285606414
+      BigSprite-Sheet_8: 255023743
+      BigSprite-Sheet_9: -958220616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

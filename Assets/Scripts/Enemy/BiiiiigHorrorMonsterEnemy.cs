@@ -23,6 +23,9 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
     private List<WeightedObject<string>> weightedDecisions;
     [SerializeField]
     private float variableDecisionTime = .25f;
+
+    [SerializeField]
+    private Animator anim;
     protected override void Start()
     {
         base.Start();
@@ -47,6 +50,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
         {
             timeBeforeNextAttack = timeBetweenAttacks;
             player.TakeDamage(attackDamage);
+            anim.SetBool("Attacking", true);
             Debug.Log(this.name + " attacked player for " + attackDamage + " damage");
         }
         if (timeBeforeNextDecision < 0f)
@@ -55,9 +59,11 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
             switch(Utils.GetRandomWeightedObject(weightedDecisions).item)
             {
                 case "noMove":
+                    anim.SetBool("Moving", false);
                     initNewMovementAi(noMovementAi);
                     break;
                 case "move":
+                    anim.SetBool("Moving", true);
                     moveToPositionAi.UpdateValues(player.transform.position.x - distanceToPlayer, player.transform.position.x + distanceToPlayer, player.transform.position.y - distanceToPlayer, player.transform.position.y + distanceToPlayer);
                     initNewMovementAi(moveToPositionAi);
                     break;
@@ -66,5 +72,10 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
                     break;
             }
         }
+    }
+
+    public void EndAttack()
+    {
+        anim.SetBool("Attacking", false);
     }
 }

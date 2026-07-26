@@ -20,6 +20,9 @@ public class MagicPewPewCultistEnemy : EnemyController
     [SerializeField]
     private float variableDecisionTime = .25f;
 
+    [SerializeField]
+    private Animator anim;
+
     protected override void Start()
     {
         base.Start();
@@ -45,12 +48,15 @@ public class MagicPewPewCultistEnemy : EnemyController
             switch(Utils.GetRandomWeightedObject(weightedDecisions).item)
             {
                 case "shoot":
+                    anim.SetBool("Moving", false);
                     FireBullet();
                     break;
                 case "noMove":
+                    anim.SetBool("Moving", false);
                     initNewMovementAi(noMovementAi);
                     break;
                 case "move":
+                    anim.SetBool("Moving", true);
                     initNewMovementAi(moveToPositionAi);
                     break;
                 default:

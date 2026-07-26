@@ -123,6 +123,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioSource walkingSFX; //Iffy on, not implemented
 
+    // Animation 
+    [SerializeField]
+    private Animator anim;
+
 
     void Start()
     {
@@ -220,7 +224,13 @@ public class PlayerController : MonoBehaviour
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
-        
+
+        // For animations
+        if (moveInput.magnitude != 0)
+            anim.SetBool("Moving", true);
+        else
+            anim.SetBool("Moving", false);
+
         // Debug.Log(healthTimer);
         if (healthTimer <= 0)
         {
@@ -240,6 +250,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
     {
+        anim.SetBool("Attacking", true);
         shootingSFX.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
         shootingSFX.Play();
 
@@ -259,6 +270,12 @@ public class PlayerController : MonoBehaviour
                 bullet.transform.localScale *= 3f;
         }
     }
+
+    public void ShottheShot()
+    { 
+        anim.SetBool("Attacking", false);
+    }
+
 
     public Rigidbody2D GetRigidbody()
     {
@@ -421,6 +438,11 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Debug key pressed in player, completing level");
         LevelManager.OnDebug(inputValue);
+    }
+
+    public float GetTimer()
+    {
+        return healthTimer;
     }
 
     public void AddCurse(Curse curse)
