@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BiiiiigHorrorMonsterEnemy
   health: 10
-  movementAi: {fileID: -5318488829703541689}
+  movementAi: {fileID: -5682707385064074144}
   moveSpeed: 300
   damage: 5
   hurtSFX: {fileID: 7607530694011726153}

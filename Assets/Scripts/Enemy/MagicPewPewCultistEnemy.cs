@@ -28,7 +28,7 @@ public class MagicPewPewCultistEnemy : EnemyController
         base.Start();
         moveToPositionAi.initialize(player.transform, transform);
         noMovementAi.initialize(player.transform, transform);
-        initNewMovementAi(moveToPositionAi);
+        initNewMovementAi(noMovementAi);
     }
     private void initNewMovementAi(MovementAi newMovementAi)
     {

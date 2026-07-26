@@ -31,7 +31,7 @@ public class DaggerCultistEnemy : EnemyController
         moveToPositionAi.initialize(player.transform, transform);
         noMovementAi.initialize(player.transform, transform);
         moveAwayFromPlayerAi.initialize(player.transform, transform);
-        initNewMovementAi(moveToPositionAi);
+        initNewMovementAi(noMovementAi);
     }
 
     private void initNewMovementAi(MovementAi newMovementAi)

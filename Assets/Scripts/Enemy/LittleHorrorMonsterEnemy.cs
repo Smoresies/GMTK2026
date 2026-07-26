@@ -3,13 +3,30 @@ using UnityEngine;
 
 public class LittleHorrorMonsterEnemy : EnemyController
 {
-
-
+    [SerializeField]
+    protected MoveToPlayerAi moveToPlayerAi;
+    [SerializeField]
+    protected NoMovementAi noMovementAi;
     [SerializeField]
     private GameObject explosionPrefab;
 
     [SerializeField]
     private float attackDistance;
+
+    protected override void Start()
+    {
+        base.Start();
+        moveToPlayerAi.initialize(player.transform, transform);
+        noMovementAi.initialize(player.transform, transform);
+        initNewMovementAi(noMovementAi);
+    }
+
+    private void initNewMovementAi(MovementAi newMovementAi)
+    {
+        movementAi = newMovementAi;
+        movementAi.initialize(player.transform, transform);
+        Debug.Log(this.name + " is now using " + newMovementAi.GetType().Name);
+    }
 
     protected override void FixedUpdate()
     {
