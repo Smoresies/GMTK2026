@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30053484634ae0147884cb4c36c794ca, type: 3}
-  m_Name: Level2
+  m_Name: Level1 1
   m_EditorClassIdentifier: Assembly-CSharp::Level
-  prefab: {fileID: 2603956575235830230, guid: 484b4ce7b09edfc4fa8a326f35e1612d, type: 3}
-  minXSpawnLocation: 0
-  maxXSpawnLocation: 5
-  minYSpawnLocation: 0
-  maxYSpawnLocation: 8
+  prefab: {fileID: 7180228036008418284, guid: 951ebefb9cbab034e86c8dec508002c4, type: 3}
+  minXSpawnLocation: -12
+  maxXSpawnLocation: 12
+  minYSpawnLocation: -2
+  maxYSpawnLocation: 18
+  waitForSpawnTime: 2

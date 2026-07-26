@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Relic
   relicSprite: {fileID: 2585759002646002766, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
   relicName: Bottled Rage
-  relicDescription: Enemies now Friendly Fire BUT Enemies explode after death
+  relicDescription: Enemies now EXPLODE!

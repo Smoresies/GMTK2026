@@ -17,6 +17,9 @@ public class StartMenuManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource buttonClick;
+    
+    [SerializeField]
+    private GameObject timer;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class StartMenuManager : MonoBehaviour
         Debug.Log("Sound finished! Continuing code...");
 
         startMenuUI.SetActive(false);
+        timer.SetActive(true);
         levelManager.StartGame();
     }
 
