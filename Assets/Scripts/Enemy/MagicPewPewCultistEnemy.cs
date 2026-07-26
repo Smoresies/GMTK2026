@@ -8,13 +8,7 @@ public class MagicPewPewCultistEnemy : EnemyController
     [SerializeField]
     protected NoMovementAi noMovementAi;
     [SerializeField]
-    private int damage = 0;
-    [SerializeField]
     private float timeBetweenDecisions = 1f;
-    [SerializeField]
-    private float resetTime = 3f;
-    [SerializeField]
-    private float fireRange;
     private float timeBeforeNextDecision = 0f;
     public GameObject bulletPrefab;
     [SerializeField]
@@ -23,6 +17,9 @@ public class MagicPewPewCultistEnemy : EnemyController
     private int bulletDamage = 1;
     [SerializeField]
     private List<WeightedObject<string>> weightedDecisions;
+    [SerializeField]
+    private float variableDecisionTime = .25f;
+
     protected override void Start()
     {
         base.Start();
@@ -44,7 +41,7 @@ public class MagicPewPewCultistEnemy : EnemyController
         // Debug.Log("Time before next shot: " + timeBeforeNextShot);
         if (timeBeforeNextDecision < 0f)
         {
-            timeBeforeNextDecision = timeBetweenDecisions;
+            timeBeforeNextDecision = timeBetweenDecisions + Random.Range(-variableDecisionTime, variableDecisionTime);
             switch(Utils.GetRandomWeightedObject(weightedDecisions).item)
             {
                 case "shoot":

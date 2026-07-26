@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
         int enemyNum = (int)(UnityEngine.Random.Range(2, 5) * (player.curse7 ? 1.5f : 1.0f));
         for(int i =0; i < enemyNum; i++)
         {
-            enemies.Add(magicPewPewCultistEnemyPrefab);
+            enemies.Add(daggerCultistEnemyPrefab);
         }
         nextRoom.Init(enemies, CompleteLevel);
     }
