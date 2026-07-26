@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26940d9daf93d2b4b96373684df6df25, type: 3}
-  m_Name: Curse5
+  m_Name: Curse6
   m_EditorClassIdentifier: Assembly-CSharp::Curse
-  curseIdentifier: 5
-  curseDescription: Time ticks down faster if you aren't actively moving
+  curseIdentifier: 6
+  curseDescription: Your attacks move at half speed

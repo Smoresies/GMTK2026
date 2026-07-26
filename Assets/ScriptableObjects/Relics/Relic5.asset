@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8136beaa8d5f364abdfd6e7b11bf6bd, type: 3}
   m_Name: Relic5
   m_EditorClassIdentifier: Assembly-CSharp::Relic
-  relicSprite: {fileID: -1212740571489075162, guid: 677d5d5badeca274e8a99f3e6bd1fb62, type: 3}
-  relicName: Relic5
-  relicDescription: relic 5 desc
+  relicSprite: {fileID: -5803783297837564747, guid: eacd555c276396b4abf941ceb81aecfc, type: 3}
+  relicName: Evocation Dysfuntion Pills
+  relicDescription: Your projectiles are twice as big!

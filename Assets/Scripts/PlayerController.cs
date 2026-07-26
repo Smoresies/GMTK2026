@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public bool hasChronoSword { get; private set; } = false;
     
     public bool hasBottledRage { get; private set; } = false;
+    public bool hasLightningCharm { get; private set; } = false;
 
     // Needed just... fucking... everywhere.
     public bool hasTrickstersDeck { get; private set; } = false;
@@ -153,7 +154,7 @@ public class PlayerController : MonoBehaviour
             dashTimeRemaining = dashDuration;
             
             if(curse4)
-                slownessTimer = 3.0f;
+                slownessTimer = 1.0f;
         }
     }
 
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour
         if (healthTimer <= everyFiveSecondsTimer)
         {
             EveryFiveSeconds();
-            everyFiveSecondsTimer -= 1;
+            everyFiveSecondsTimer -= 5;
         }
         // Only fire if we are inputting to fire and the timer is 0. 
         if (isFiring)
@@ -193,7 +194,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Adds the ability to be "slowed"
-        float currentSpeed = (isDashing ? dashSpeed : moveSpeed) * (slownessTimer > 0f ? 0.5f : 1.0f);
+        float currentSpeed = (isDashing ? dashSpeed : moveSpeed) * (slownessTimer > 0f ? 0.25f : 1.0f);
         rigidBody.linearVelocity = moveInput * (currentSpeed * Time.fixedDeltaTime);
         // Debug.Log("Player Velocity: " + rigidBody.linearVelocity);
         dashTimeRemaining -= Time.fixedDeltaTime;
@@ -213,9 +214,9 @@ public class PlayerController : MonoBehaviour
 
         if (edPills)
         {
-            bullet.transform.localScale *= 2f;
+            bullet.transform.localScale *= 3f;
             if (hasTrickstersDeck)
-                bullet.transform.localScale *= 2f;
+                bullet.transform.localScale *= 3f;
         }
     }
     /*
@@ -381,12 +382,91 @@ public class PlayerController : MonoBehaviour
 
     public void AddCurse(Curse curse)
     {
-
+        switch (curse.curseIdentifier)
+        {
+            case 4:
+                curse4 = true;
+                break;
+            case 5:
+                curse5 = true;
+                break;
+            case 6:
+                curse6 = true;
+                break;
+            case 8:
+                curse8 = true;
+                break;
+            case 9:
+                curse9 = true;
+                break;
+            default:
+                break;
+        }
     }
 
     public void AddRelic(Relic relic)
     {
-
+        switch (relic.relicName)
+        {
+            case "Carmine Knight":
+                carmineKnight = true;
+                break;
+            case "Carmine Rook":
+                carmineRook = true;
+                break;
+            case "Carmine Bishop":
+                carmineBishop = true;
+                break;
+            case "Dubious Energy Tonic":
+                hasDubiousEnergy = true;
+                break;
+            case "Evocation Dysfuntion Pills":
+                edPills = true;
+                break;
+            case "Bag of Wizard Coke":
+                wizardCoke();
+                break;
+            case "Chronomancer's Shield":
+                chronomachersShield = true;
+                break;
+            case "Chronomancer's Boots":
+                chronomancersBoots = true;
+                break;
+            case "Chronomancer's Blade":
+                hasChronoSword = true;
+                break;
+            case "Temporal Paradoxes for Dummies":
+                TPfD = true;
+                break;
+            case "Infinite Edges Charm":
+                CritUpdate(true);
+                break;
+            case "Lightning Charm":
+                CritUpdate();
+                hasLightningCharm = true;
+                break;
+            case "Chronomancer's Charm":
+                hasChronoCharm = true;
+                break;
+            case "Bombardier's Belt":
+                bombBelt = true;
+                break;
+            case "Flower of the Old One":
+                hasFotOO = true;
+                break;
+            case "Bottled Rage":
+                hasBottledRage = true;
+                break;
+            case "Trickster's Deck":
+                hasTrickstersDeck = true;
+                break;
+            case "Ripped Clover Charm":
+                hasRippedClover = true;
+                break;
+            default:
+                Debug.Log("Shit's Fucked");
+                break;
+        }
     }
 }
 

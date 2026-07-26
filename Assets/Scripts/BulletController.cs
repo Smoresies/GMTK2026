@@ -48,11 +48,15 @@ public class BulletController : MonoBehaviour
             // Jagged Charm
             
             // Lightning Charm
-            GameObject explode = Instantiate(explosionPrefab, transform.position, transform.rotation);
-            explode.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
+            if (pc.hasLightningCharm && didCrit)
+            {
+               GameObject explode = Instantiate(explosionPrefab, transform.position, transform.rotation);
+               explode.GetComponent<ExplosionManager>().SetDamage(_damage * 0.5f);
+            }
+            
             
             // Chronomancer's Charm
-            if (pc.hasChronoCharm)
+            if (pc.hasChronoCharm && didCrit)
             {
                
                if (pc.chronoCharmCD <= 0.0f)
