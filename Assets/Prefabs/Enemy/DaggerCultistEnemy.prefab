@@ -52,11 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663508a1142cadb458e7a02da530fe9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DaggerCultistEnemy
-  health: 10
+  health: 5
   movementAi: {fileID: -927870289759768313}
   moveSpeed: 300
   damage: 5
   hurtSFX: {fileID: -388247873813645408}
+  spawnSmoke: {fileID: 7912660409315329846, guid: beb91fb2f8cbd2948b3645b0c44089cd, type: 3}
   moveToPositionAi: {fileID: 8647663329264004823}
   noMovementAi: {fileID: -927870289759768313}
   moveAwayFromPlayerAi: {fileID: 3914051078149057602}

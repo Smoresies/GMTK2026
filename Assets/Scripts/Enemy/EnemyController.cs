@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     protected int damage = 5;
     [SerializeField]
     private AudioSource hurtSFX;
+    [SerializeField]
+    private GameObject spawnSmoke;
 
     protected PlayerController player;
     public Action OnDeathEvent;
@@ -25,6 +27,9 @@ public class EnemyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         player = FindAnyObjectByType<PlayerController>();
         movementAi.initialize(player.transform, transform);
+        ParticleSystem ps = Instantiate(spawnSmoke, transform.position, transform.rotation).GetComponent<ParticleSystem>();
+        // spawnSmoke.GetComponent<ParticleSystem>().Play();
+        Debug.Log("Should be spawning particles");
     }
     public virtual void TakeDamage(float damage)
     {
