@@ -696,6 +696,10 @@ MonoBehaviour:
     weight: 1
   - item: {fileID: 11400000, guid: d7f33b4274476ee4e8fd6773990562ca, type: 2}
     weight: 1
+  - item: {fileID: 11400000, guid: 77b1ef8244cc4a541b867d72dae1933e, type: 2}
+    weight: 1
+  - item: {fileID: 11400000, guid: 5a34d258ee99b714787357c617740628, type: 2}
+    weight: 1
   shopUI: {fileID: 1858078333}
   closeShopButton: {fileID: 431739053}
   slot1Button: {fileID: 264724561}

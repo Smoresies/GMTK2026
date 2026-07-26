@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
     private bool bombBelt = false;
     private bool hasDubiousEnergy = false;
     private bool hasFotOO = false;
+    private bool hasQuill = false;
     
     // Needed externally for Bullets
     public bool hasRippedClover { get; private set; } = false;
@@ -195,7 +196,8 @@ public class PlayerController : MonoBehaviour
         if (frozenTimeTimer <= 0.0f)
         {
             healthTimer -= (Time.deltaTime * (hasFotOO ? timeRate : 1.0f)) * 
-                                    ((curse5 && moveInput.magnitude == 0 && !isDashing) ? 2.0f : 1.0f);
+                                    ((curse5 && moveInput.magnitude == 0 && !isDashing) ? 2.0f : 1.0f) *
+                                    ((hasQuill) ? 2.0f : 1.0f);
             everyFiveSecondsTimer -= Time.deltaTime;
         }
             
@@ -499,10 +501,20 @@ public class PlayerController : MonoBehaviour
                 hasTrickstersDeck = true;
                 break;
             case "Ripped Clover Charm":
+                CritUpdate();
+                CritUpdate();
                 hasRippedClover = true;
                 break;
+            case "Cerulean Quill":
+                fireRate *= 1.5f;
+                moveSpeed *= 1.5f;
+                hasQuill = true;
+                break;
+            case "Weighted Die":
+                hasWeightedDie = true;
+                break;
             default:
-                Debug.Log("Shit's Fucked");
+                Debug.Log("Shit's Fucked " + relic.relicName);
                 break;
         }
     }
