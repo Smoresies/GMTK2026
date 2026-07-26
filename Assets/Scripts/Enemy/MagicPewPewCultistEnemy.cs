@@ -9,7 +9,7 @@ public class MagicPewPewCultistEnemy : EnemyController
     protected NoMovementAi noMovementAi;
     [SerializeField]
     private float timeBetweenDecisions = 1f;
-    private float timeBeforeNextDecision = 0f;
+    private float timeBeforeNextDecision = 1f;
     public GameObject bulletPrefab;
     [SerializeField]
     private float bulletSpeed = 10f;

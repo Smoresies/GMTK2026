@@ -9,7 +9,7 @@ public class BiiiiigHorrorMonsterEnemy : EnemyController
     protected NoMovementAi noMovementAi;
     [SerializeField]
     private float timeBetweenDecisions = 1f;
-    private float timeBeforeNextDecision = 0f;
+    private float timeBeforeNextDecision = 1f;
     [SerializeField]
     private float timeBetweenAttacks = 1f;
     private float timeBeforeNextAttack = 0f;

@@ -434,11 +434,6 @@ public class PlayerController : MonoBehaviour
         healthTimer -= damage;
     }
 
-    public void OnDebug(InputValue inputValue)
-    {
-        Debug.Log("Debug key pressed in player, completing level");
-        LevelManager.OnDebug(inputValue);
-    }
 
     public float GetTimer()
     {

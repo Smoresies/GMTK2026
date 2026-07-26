@@ -9,7 +9,9 @@ public class LittleHorrorMonsterEnemy : EnemyController
     protected NoMovementAi noMovementAi;
     [SerializeField]
     private GameObject explosionPrefab;
-
+    [SerializeField]
+    private float timeBetweenDecisions = 2f;
+    private float timeBeforeNextDecision = 2f;
     [SerializeField]
     private float attackDistance;
 
@@ -31,7 +33,11 @@ public class LittleHorrorMonsterEnemy : EnemyController
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
+        timeBeforeNextDecision -= Time.fixedDeltaTime;
+        if (timeBeforeNextDecision < 0f)
+        {
+            initNewMovementAi(moveToPlayerAi);
+        }
         if ((player.transform.position - transform.position).magnitude < attackDistance)
         {    
             GameObject explo = Instantiate(explosionPrefab, transform.position, transform.rotation);

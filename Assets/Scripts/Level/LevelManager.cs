@@ -65,9 +65,4 @@ public class LevelManager : MonoBehaviour
         audioManager.ShopTime();
     }
 
-    public void OnDebug(InputValue inputValue)
-    {
-        Debug.Log("Debug key pressed, completing level");
-        CompleteLevel();
-    }
 }
