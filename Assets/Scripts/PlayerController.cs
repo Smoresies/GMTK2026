@@ -220,9 +220,13 @@ public class PlayerController : MonoBehaviour
                                     ((hasQuill) ? 2.0f : 1.0f);
             everyFiveSecondsTimer -= Time.deltaTime;
         }
-            
+
         else
+        {
             frozenTimeTimer -= Time.deltaTime;
+            // Debug.Log(frozenTimeTimer);
+        }
+            
         relicCooldowns();
 
         // For animations
@@ -374,7 +378,7 @@ public class PlayerController : MonoBehaviour
             frozenTimeTimer = 1.0f;
 
         if (TPfD)
-            frozenTimeTimer *= 2.0f;
+            frozenTimeTimer += 1.0f;
     }
 
     private void relicCooldowns()
@@ -540,6 +544,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Trickster's Deck":
                 hasTrickstersDeck = true;
+                relicCDs *= 2f;
                 break;
             case "Ripped Clover Charm":
                 CritUpdate();

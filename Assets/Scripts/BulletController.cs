@@ -57,7 +57,11 @@ public class BulletController : MonoBehaviour
                {
                   // only start the CD on the final application.
                   if (i + 1 == attacks)
+                  {
                      pc.chronoCharmCD = pc.relicCDs;
+                     Debug.Log(pc.chronoCharmCD);
+                  }
+                     
                   pc.freezeTime();
                   if(pc.hasTrickstersDeck)
                      pc.freezeTime();

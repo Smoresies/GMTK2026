@@ -85,7 +85,7 @@ public class ShopManager : MonoBehaviour
         didBuy = false;
         if (playerController.hasTongue)
             tongueReroll = true;
-        slotCost1 = 15 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
+        slotCost1 = 30 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
         slotCost2 = 30 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
         slotCost3 = 45 + (playerController.curse3 ? 15 : 0) - (playerController.hasMembership ? 10 : 0);
         relic1 = Utils.GetRandomWeightedObject(regularRelics);
