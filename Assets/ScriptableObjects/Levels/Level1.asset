@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30053484634ae0147884cb4c36c794ca, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::Level
-  prefab: {fileID: 2873124216440204981, guid: 59b1ebe79e821ed45862daaa1d0120aa, type: 3}
+  prefab: {fileID: 7180228036008418284, guid: 951ebefb9cbab034e86c8dec508002c4, type: 3}
   minXSpawnLocation: 0
   maxXSpawnLocation: 5
   minYSpawnLocation: 0
