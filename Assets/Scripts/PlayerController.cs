@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -175,7 +176,7 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashingRelics();
             dashTimeRemaining = dashDuration;
-            dashSFX.pitch = Random.Range(0.9f, 1.1f);
+            dashSFX.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             dashSFX.Play();
 
             if (curse4)
@@ -219,7 +220,8 @@ public class PlayerController : MonoBehaviour
         else
             frozenTimeTimer -= Time.deltaTime;
         relicCooldowns();
-                Debug.Log(healthTimer);
+        
+        // Debug.Log(healthTimer);
         if (healthTimer <= 0)
         {
             Die();
@@ -238,7 +240,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot(Vector2 _shootDir, Vector3 offset = default(Vector3))
     {
-        shootingSFX.pitch = Random.Range(0.9f, 1.1f);
+        shootingSFX.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
         shootingSFX.Play();
 
         // Fire towards shootDir
@@ -389,7 +391,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             healthTimer -= damage;
-            hurtSFX.pitch = Random.Range(0.9f, 1.1f);
+            hurtSFX.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             hurtSFX.Play();
         }
         

@@ -54,7 +54,7 @@ public class MagicPewPewCultistEnemy : EnemyController
                     initNewMovementAi(moveToPositionAi);
                     break;
                 default:
-                    Debug.LogError("You dun fucked up decicisons A-A RON");
+                    Debug.LogError("You dun fucked up decicisons A-A RON: " + Utils.GetRandomWeightedObject(weightedDecisions).item);
                     break;
             }
         }
