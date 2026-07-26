@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
+    public event Action OnWinGame;
     [SerializeField]
     private ShopManager shopManager;
     [SerializeField]
@@ -61,6 +62,7 @@ public class LevelManager : MonoBehaviour
 
     private void WinGame()
     {
+        OnWinGame?.Invoke();
         Debug.Log("You win");
     }
 
