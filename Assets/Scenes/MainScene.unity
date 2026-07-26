@@ -661,6 +661,8 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 2705fe6138fe93947888c167c2c0bc5b, type: 2}
     weight: 1
   regularCurses:
+  - item: {fileID: 11400000, guid: ae0f23f01890e9246ba1971de0bb0422, type: 2}
+    weight: 1
   - item: {fileID: 11400000, guid: c2758678d6603c248b5b63ab082060a9, type: 2}
     weight: 1
   - item: {fileID: 11400000, guid: 9d117d3412aeff54bb6af5282eb83bb2, type: 2}
@@ -668,6 +670,10 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: f788b82892f513b4f81a87af4009a5da, type: 2}
     weight: 1
   - item: {fileID: 11400000, guid: e9ce5e897f7b5184a952129ae22c6d2f, type: 2}
+    weight: 1
+  - item: {fileID: 11400000, guid: bfc82e77ad9d2af4bb9b77621d905eaa, type: 2}
+    weight: 1
+  - item: {fileID: 11400000, guid: 878dbf9863129f94f9dd4d11c0930d33, type: 2}
     weight: 1
   legendaryRelicCursePairs:
   - item: {fileID: 11400000, guid: 47a4c933b85b8f04687602148d89b53b, type: 2}

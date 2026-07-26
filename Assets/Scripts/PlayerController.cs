@@ -93,12 +93,15 @@ public class PlayerController : MonoBehaviour
     
     
     // CURSES
+    public bool curse3 { get; private set; } = false;
     private bool curse4 = false;
     private bool curse5 = false;
     private bool curse6 = false;
     private bool curse8 = false;
     private bool curse9 = false;
-
+    public bool curse12 { get; private set; } = false;
+    public bool curse16 { get; private set; } = false;
+    
     public LevelManager LevelManager;
 
     void Start()
@@ -389,6 +392,9 @@ public class PlayerController : MonoBehaviour
     {
         switch (curse.curseIdentifier)
         {
+            case 3:
+                curse3 = true;
+                break;
             case 4:
                 curse4 = true;
                 break;
@@ -403,6 +409,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case 9:
                 curse9 = true;
+                break;
+            case 12:
+                curse12 = true;
+                break;
+            case 16:
+                curse16 = true;
                 break;
             default:
                 break;

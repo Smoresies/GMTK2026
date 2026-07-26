@@ -55,6 +55,8 @@ public class ShopManager : MonoBehaviour
     private int slotCost2 = 30;
     private int slotCost3 = 45;
 
+    private bool didBuy = false;
+
     void Awake()
     {
         DisableShop();
@@ -76,9 +78,10 @@ public class ShopManager : MonoBehaviour
         choseSlot1 = false;
         choseSlot2 = false;
         choseSlot3 = false;
-        slotCost1 = 15;
-        slotCost2 = 30;
-        slotCost3 = 45;
+        didBuy = false;
+        slotCost1 = 15 + (playerController.curse3 ? 15 : 0);
+        slotCost2 = 30 + (playerController.curse3 ? 15 : 0);
+        slotCost3 = 45 + (playerController.curse3 ? 15 : 0);
         relic1 = Utils.GetRandomWeightedObject(regularRelics);
         regularRelics.Remove(relic1);
         relic2 = Utils.GetRandomWeightedObject(regularRelics);
@@ -92,8 +95,8 @@ public class ShopManager : MonoBehaviour
         relicImage1.sprite = relic1.item.relicSprite;
         relicImage2.sprite = relic2.item.relicSprite;
         relicImage3.sprite = legendaryRelicCursePair.item.relicSprite;
-        relicText1.text = slotCost1 + " Health\n" + relic1.item.relicName + "\n" + relic1.item.relicDescription + "\n<color=purple>" + curse1.item.curseDescription + "</color>";
-        relicText2.text = slotCost2 + " Health\n" + relic2.item.relicName + "\n" + relic2.item.relicDescription + "\n<color=purple>" + curse2.item.curseDescription + "</color>";
+        relicText1.text = slotCost1 + " Health\n" + relic1.item.relicName + "\n" + relic1.item.relicDescription + "\n<color=purple>" + (playerController.curse16 ? "???" : curse1.item.curseDescription) + "</color>";
+        relicText2.text = slotCost2 + " Health\n" + relic2.item.relicName + "\n" + relic2.item.relicDescription + "\n<color=purple>" + (playerController.curse16 ? "???" : curse2.item.curseDescription) + "</color>";
         relicText3.text = slotCost3 + " Health\n" + legendaryRelicCursePair.item.relicName + "\n"  + legendaryRelicCursePair.item.relicDescription;
         shopUI.SetActive(true);
 
@@ -104,6 +107,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ChooseSlot(int slotIndex)
     {
+        didBuy = true;
         switch (slotIndex)
         {
             case 1:
@@ -159,7 +163,7 @@ public class ShopManager : MonoBehaviour
             relic1 = newRelic;
             curse1 = newCurse;
             relicImage1.sprite = newRelic.item.relicSprite;
-            relicText1.text = slotCost1 + " Health\n" + relic1.item.relicName + "\n" + relic1.item.relicDescription + "\n<color=purple>" + curse1.item.curseDescription + "</color>";
+            relicText1.text = slotCost1 + " Health\n" + relic1.item.relicName + "\n" + relic1.item.relicDescription + "\n<color=purple>" + (playerController.curse16 ? "???" : curse1.item.curseDescription) + "</color>";
         }
         else if (slotIndex == 2)
         {
@@ -185,7 +189,7 @@ public class ShopManager : MonoBehaviour
             relic2 = newRelic;
             curse2 = newCurse;
             relicImage2.sprite = newRelic.item.relicSprite;
-            relicText2.text = slotCost2 + " Health\n" + relic2.item.relicName + "\n" + relic2.item.relicDescription + "\n<color=purple>" + curse2.item.curseDescription + "</color>";
+            relicText2.text = slotCost2 + " Health\n" + relic2.item.relicName + "\n" + relic2.item.relicDescription + "\n<color=purple>" + (playerController.curse16 ? "???" : curse2.item.curseDescription) + "</color>"; 
         } else if (slotIndex == 3)
         {
             rerollSlot3Button.interactable = false;
@@ -210,6 +214,8 @@ public class ShopManager : MonoBehaviour
 
     public void EndShop()
     {
+        if(!didBuy && playerController.curse12)
+            playerController.Capitalism(30);
         if (choseSlot1)
             slot1Button.interactable = true;
         else
