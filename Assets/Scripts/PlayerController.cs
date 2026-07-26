@@ -374,6 +374,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Capitalism(float damage)
+    {
+        healthTimer -= damage;
+    }
+
     public void OnDebug(InputValue inputValue)
     {
         Debug.Log("Debug key pressed in player, completing level");
