@@ -37,7 +37,6 @@ public class Level : ScriptableObject
     {
         Debug.Log("Game started...");
 
-        // 3. Pause execution here for 3 seconds
         yield return new WaitForSeconds(waitForSpawnTime);
 
         foreach (GameObject enemyPrefab in enemyPrefabsToSpawn)
@@ -50,13 +49,14 @@ public class Level : ScriptableObject
             enemy.transform.position = GetRandomSpawnLocation();
             enemyController.OnDeathEvent += EnemyDied;
             numEnemiesRemaining++;
-        }    }
+        }
+    }
 
 
     public void EnemyDied()
     {
         numEnemiesRemaining--;
-        if(IsLevelComplete())
+        if (IsLevelComplete())
         {
             CompleteLevel();
         }

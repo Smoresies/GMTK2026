@@ -3289,10 +3289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf18513c2a7f88644bef06b6b31a221d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  biiiiigHorrorMonsterEnemyPrefab: {fileID: 8628614583826300223, guid: 776a5ba24c805cd4fb342945e9826848, type: 3}
-  daggerCultistEnemyPrefab: {fileID: 5287844853113591602, guid: 1c7ff7d79d2e69d45a5fc86345fddf13, type: 3}
-  littleHorrorMonsterEnemyPrefab: {fileID: 2625159629899878955, guid: 7c3465f1189962641b73d1a9a51f53b5, type: 3}
-  magicPewPewCultistEnemyPrefab: {fileID: 932359359872522324, guid: 754893ab3d649784bbb3590312bfc2fa, type: 3}
   shopManager: {fileID: 393336311}
   listOfLevelsWithWeights:
   - item: {fileID: 11400000, guid: b265f2e0de1b72e46b3fb9bcb6d7acfd, type: 2}
@@ -3302,6 +3298,17 @@ MonoBehaviour:
   firstRoomPrefab: {fileID: 11400000, guid: b265f2e0de1b72e46b3fb9bcb6d7acfd, type: 2}
   lastRoomPrefab: {fileID: 11400000, guid: 9744349222890324db6f58c135cd259d, type: 2}
   totalNumberOfRooms: 1000
+  enemyPrefabList:
+  - item: {fileID: 8628614583826300223, guid: 776a5ba24c805cd4fb342945e9826848, type: 3}
+    weight: 1
+  - item: {fileID: 5287844853113591602, guid: 1c7ff7d79d2e69d45a5fc86345fddf13, type: 3}
+    weight: 3
+  - item: {fileID: 2625159629899878955, guid: 7c3465f1189962641b73d1a9a51f53b5, type: 3}
+    weight: 1
+  - item: {fileID: 932359359872522324, guid: 754893ab3d649784bbb3590312bfc2fa, type: 3}
+    weight: 4
+  minNumEnemies: 2
+  maxNumEnemies: 5
 --- !u!4 &1843616091
 Transform:
   m_ObjectHideFlags: 0
